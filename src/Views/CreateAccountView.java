@@ -17,6 +17,8 @@ import javax.swing.*;
 
 import javax.swing.JFrame;
 
+import Models.Account;
+
 public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
 	public CreateAccountView(){
 		final JTextArea userField = new JTextArea(5,10);
@@ -27,8 +29,8 @@ public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
 					public void actionPerformed(ActionEvent event){
 						String user = userField.getText();
 						String pw = pwField.getText();
-						//Account temp = new Account(user, pw);
-						//temp.createAccount();
+						Account temp = new Account(user, pw);
+						temp.createAccount();
 					}
 		});
 		JPanel fields = new JPanel();

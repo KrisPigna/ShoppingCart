@@ -34,10 +34,10 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		buttons.add(createAcct);
 		//JFrame frame = new JFrame();
 		this.setLayout(new BorderLayout());
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(fields, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
-		//this.pack();
+		this.pack();
 		this.setVisible(true);
 	}
 	
@@ -74,5 +74,9 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		// TODO Auto-generated method stub
 
 	}*/
+	
+	public static void main(String[] args){
+		LoginView login = new LoginView();
+	}
 	
 }

@@ -20,7 +20,8 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		createAcct.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						//state.createAccountView();
+						setVisible(false);
+						CreateAccountView create = new CreateAccountView();
 					}
 		});
 		JPanel fields = new JPanel();
@@ -78,5 +79,4 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 	public static void main(String[] args){
 		LoginView login = new LoginView();
 	}
-	
 }

@@ -21,8 +21,8 @@ import Models.Account;
 
 public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
 	public CreateAccountView(){
-		final JTextArea userField = new JTextArea(5,10);
-		final JTextArea pwField = new JTextArea(5,10);
+		final JTextArea userField = new JTextArea(1,10);
+		final JTextArea pwField = new JTextArea(1,10);
 		JButton create = new JButton("Create");
 		create.addActionListener(new
 				ActionListener(){
@@ -31,6 +31,7 @@ public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
 						String pw = pwField.getText();
 						Account temp = new Account(user, pw);
 						temp.createAccount();
+						dispose();
 					}
 		});
 		JPanel fields = new JPanel();

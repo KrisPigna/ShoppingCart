@@ -20,7 +20,7 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		createAcct.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						setVisible(false);
+						dispose();
 						CreateAccountView create = new CreateAccountView();
 					}
 		});

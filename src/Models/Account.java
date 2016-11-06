@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import Views.*;
+
 public class Account {
 	public Account(){
 		username = null;
@@ -18,19 +20,9 @@ public class Account {
 	}
 	
 	public void createAccount(){
-		ArrayList<String> lines = new ArrayList();
-		lines.add(username);
-		lines.add(password);
-		Path p = Paths.get("C:\\Users\\Public\\Desktop\\", "accountsDB.txt");
-		try{
-			if (Files.exists(p) == false){
-				Files.createFile(p);
-			}
-			Files.write(p, lines, Charset.forName("UTF-8"));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		//login.Notify();
+		//TODO add save-to-DB functionality
+		
+		LoginView login = new LoginView();
 	}
 	
 	private String username;

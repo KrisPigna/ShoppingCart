@@ -17,6 +17,7 @@ import javax.swing.*;
 
 import javax.swing.JFrame;
 
+import Database.UserDB;
 import Models.Account;
 
 public class CreateAccountView extends JFrame /*implements LayoutManager*/ {

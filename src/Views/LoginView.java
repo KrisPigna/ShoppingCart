@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,9 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import javax.swing.*;
 
 import Models.Account;
+import Database.UserDB;
 
 public class LoginView extends JFrame /*implements LayoutManager*/ {
 	public LoginView(){
@@ -34,29 +39,31 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		login.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-		
-						try { // Insert your own directory to avoid errors.
-							FileInputStream file_in = new FileInputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
-							ObjectInputStream obj_in = new ObjectInputStream(file_in);
-							
-							Account checkLogin = (Account) obj_in.readObject();
-							
-							if(checkLogin.getUsername() == userField.getText()) {
-								System.out.println("We're onto something...");
-							}
-							else
-								System.out.println("Something is wrong...");
-							
-							file_in.close();
-							obj_in.close();
-							
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						}
+//						Account checkLogin = null;
+//						ObjectInputStream obj_in = null;
+//						ArrayList<Account> checkDB = new ArrayList<Account>();
+//						try { // Insert your own directory to avoid errors.
+//							FileInputStream file_in = new FileInputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
+//							obj_in = new ObjectInputStream(file_in);
+//							
+//							checkLogin = new Account(userField.getText(), pwField.getText());
+//							file_in.close();
+//							obj_in.close();
+//							
+//						} catch (FileNotFoundException e) {
+//							e.printStackTrace();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						} 
+//						
+//						Iterator<Account> it = checkDB.iterator();//db.getAccountList().iterator();
+//						
+//						while(it.hasNext()) {
+//							if(it.equals(checkLogin))
+//								System.out.println("Good, good...");
+//							else
+//								System.out.println("Wrong...");
+//						}
 					}
 		});
 		
@@ -113,8 +120,8 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 	}*/
 	
 	public static void main(String[] args){
+		
 		LoginView login = new LoginView();
-		
-		
+
 	}
 }

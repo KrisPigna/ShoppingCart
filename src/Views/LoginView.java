@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 import javax.swing.*;
 
 import Models.Account;
-import Database.UserDB;
+import Database.AppendToDB;
 
 public class LoginView extends JFrame /*implements LayoutManager*/ {
 	public LoginView(){
@@ -39,31 +40,57 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		login.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-//						Account checkLogin = null;
-//						ObjectInputStream obj_in = null;
+						
 //						ArrayList<Account> checkDB = new ArrayList<Account>();
+//						
 //						try { // Insert your own directory to avoid errors.
-//							FileInputStream file_in = new FileInputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
-//							obj_in = new ObjectInputStream(file_in);
+//							FileInputStream file_in = new FileInputStream("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
+//							ObjectInputStream obj_in = new ObjectInputStream(file_in);
+//							Account temp = (Account) obj_in.readObject();
 //							
-//							checkLogin = new Account(userField.getText(), pwField.getText());
-//							file_in.close();
-//							obj_in.close();
+//							try {
+//								while(temp != null) {
+//									checkDB.add(temp); System.out.println("Add called.");
+//									temp = (Account) obj_in.readObject();
+//								}
+//							} catch (EOFException e) {
+//								file_in.close();
+//								obj_in.close();
+//							} 
+//							
+//							//Iterator<Account> it = checkDB.iterator();
+//							Account checkLogin = new Account(userField.getText(), pwField.getText());
+//							
+//							for(int i = 0; i < checkDB.size(); i++) {
+//								System.out.println("Data: " +  checkDB.get(i));
+//							}
+//							
+//							for(Iterator<Account> it = checkDB.iterator(); it.hasNext();) {
+//								System.out.println("Inside for loop for iterator...");
+//								Account account = it.next();
+//								System.out.println("checkLogin: " + checkLogin.getUsername());
+//								System.out.println("DB Account: " + account.getUsername());
+//								
+//								if(checkLogin.getUsername() == account.getUsername()) {
+//									System.out.println("Good.");
+//								}
+//								else{
+//									System.out.println("Not... good...");
+//								}
+//									
+//								
+//								
+//							}
 //							
 //						} catch (FileNotFoundException e) {
 //							e.printStackTrace();
 //						} catch (IOException e) {
 //							e.printStackTrace();
+//						} catch (ClassNotFoundException e) {
+//							e.printStackTrace();
 //						} 
-//						
-//						Iterator<Account> it = checkDB.iterator();//db.getAccountList().iterator();
-//						
-//						while(it.hasNext()) {
-//							if(it.equals(checkLogin))
-//								System.out.println("Good, good...");
-//							else
-//								System.out.println("Wrong...");
-//						}
+						
+						
 					}
 		});
 		

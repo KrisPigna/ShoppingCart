@@ -1,11 +1,13 @@
 package Models;
 
 import Views.*;
-import Database.UserDB;
+import Database.AppendToDB;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,12 +43,24 @@ public class Account implements java.io.Serializable {
 		LoginView login = new LoginView();
 		
 		try { // attempting to implement "Java Serialization" for database. Insert your own directory to avoid errors.
-			FileOutputStream fileOut = new FileOutputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser" , true);
-			ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-			objOut.writeObject(this); 
+			File path = new File("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
 			
-			objOut.close();
-			fileOut.close();
+			if(!path.exists()) {
+				FileOutputStream fileOut = new FileOutputStream(path, true);
+				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+				objOut.writeObject(this);
+				objOut.close();
+				fileOut.close();
+			}
+			else {
+				FileOutputStream fileOut = new FileOutputStream(path, true);
+				AppendToDB objOut = new AppendToDB(fileOut);
+				// objOut.writeObject(this); need to verify if i need this, i think not.
+			}
+			
+			 
+			
+			
 		}
 		catch(IOException i) {
 			i.printStackTrace();

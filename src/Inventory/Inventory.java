@@ -18,7 +18,7 @@ import java.util.ArrayList;
 	            allDetails += String.valueOf(getQty() + ", ");
 	            allDetails += String.valueOf(getDescription() + ".");
 	            
-	            return allDetails; 
+	            return allDetails;
 	        }
 	    }
 	    

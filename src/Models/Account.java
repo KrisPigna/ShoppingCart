@@ -37,7 +37,7 @@ public class Account implements java.io.Serializable {
 		LoginView login = new LoginView();
 		
 		try { // attempting to implement "Java Serialization" for database. Insert your own directory to avoid errors.
-			FileOutputStream fileOut = new FileOutputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
+			FileOutputStream fileOut = new FileOutputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser" , true);
 			ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 			objOut.writeObject(this); // this is from "temp.createAccount()" call in CreateAccountView
 			

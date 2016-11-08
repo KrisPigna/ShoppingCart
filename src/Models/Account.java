@@ -80,6 +80,8 @@ public class Account implements java.io.Serializable {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				AppendToDB objOut = new AppendToDB(fileOut);
 				objOut.writeObject(this); 
+				objOut.close();
+				fileOut.close();
 			}
 		}
 		catch(IOException i) {

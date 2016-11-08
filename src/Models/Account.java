@@ -7,15 +7,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Account implements java.io.Serializable {
 	
@@ -37,12 +32,41 @@ public class Account implements java.io.Serializable {
 		return this.password;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+
 	public void createAccount(){
-		//TODO add save-to-DB functionality
-		
 		LoginView login = new LoginView();
 		
-		try { // attempting to implement "Java Serialization" for database. Insert your own directory to avoid errors.
+		try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
 			
 			if(!path.exists()) {
@@ -57,10 +81,6 @@ public class Account implements java.io.Serializable {
 				AppendToDB objOut = new AppendToDB(fileOut);
 				objOut.writeObject(this); 
 			}
-			
-			 
-			
-			
 		}
 		catch(IOException i) {
 			i.printStackTrace();

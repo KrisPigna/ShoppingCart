@@ -7,13 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.StreamCorruptedException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -43,14 +41,14 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 						
 						ArrayList<Account> checkDB = new ArrayList<Account>();
 						
-						try { // Insert your own directory to avoid errors.
+						try { // Insert your own directory to avoid errors. Filename extension must be .ser
 							FileInputStream file_in = new FileInputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
 							ObjectInputStream obj_in = new ObjectInputStream(file_in);
 							Account temp = (Account) obj_in.readObject();
 							
 							try {
 								while(temp != null) {
-									checkDB.add(temp); System.out.println("Add called.");
+									checkDB.add(temp);
 									temp = (Account) obj_in.readObject();
 								}
 							} catch (EOFException e) {
@@ -60,24 +58,18 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 							
 							Account checkLogin = new Account(userField.getText(), pwField.getText());
 							
-							for(int i = 0; i < checkDB.size(); i++) {
-								System.out.println("Data: " +  checkDB.get(i));
-								System.out.println("checkDB Size: " + checkDB.size());
-							}
-							
 							for(Iterator<Account> it = checkDB.iterator(); it.hasNext();) {
-								System.out.println("Inside for loop for iterator...");
 								Account account = it.next();
-								System.out.println("checkLogin class: " + checkLogin.getUsername().getClass().toString());
-								System.out.println("DB Account class: " + account.getUsername().getClass());
-								
-								String un = account.getUsername();
-								
-								if(checkLogin.getUsername() == un) {
-									System.out.println("Good.");
+
+								if(checkLogin.equals(account)) { // Login credentials verified, proceed to next view
+									// For testing purposes throughout development, 
+									// these two print statements should always give same number
+									// if the objects are equals.
+									//System.out.println("HashCode: " + checkLogin.hashCode());
+									//System.out.println("HashCode: " + account.hashCode());
 								}
 								else{
-									System.out.println("Not... good...");
+									// Login failed
 								}
 							}
 							

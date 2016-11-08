@@ -43,7 +43,7 @@ public class Account implements java.io.Serializable {
 		LoginView login = new LoginView();
 		
 		try { // attempting to implement "Java Serialization" for database. Insert your own directory to avoid errors.
-			File path = new File("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
+			File path = new File("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
 			
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
@@ -55,7 +55,7 @@ public class Account implements java.io.Serializable {
 			else {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				AppendToDB objOut = new AppendToDB(fileOut);
-				// objOut.writeObject(this); need to verify if i need this, i think not.
+				objOut.writeObject(this); 
 			}
 			
 			 

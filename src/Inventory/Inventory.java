@@ -1,9 +1,18 @@
 package Inventory;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import Database.AppendToDB;
+
+
 
 // hard code some inventory objects
-	class Umbrella extends Product {
+	class Umbrella extends Product implements java.io.Serializable {
 	        
 	        public double getPrice() { return 9.99; }
 	        public int getQty() { return 10; };
@@ -22,7 +31,7 @@ import java.util.ArrayList;
 	        }
 	    }
 	    
-	    class LegalPad extends Product {
+	    class LegalPad extends Product implements java.io.Serializable {
 	        
 	        public double getPrice() { return 4.99; }
 	        public int getQty() { return 18; };
@@ -41,7 +50,7 @@ import java.util.ArrayList;
 	        }
 	    }
 	    
-	    class CoffeeMug extends Product {
+	    class CoffeeMug extends Product implements java.io.Serializable {
 	        
 	        public double getPrice() { return 7.99; }
 	        public int getQty() { return 36; };
@@ -73,6 +82,40 @@ import java.util.ArrayList;
 	    
 	    public Inventory() {
 	        prodList = new ArrayList<>();
+	        
+	        prodList.add(new Umbrella());
+	        prodList.add(new LegalPad());
+	        prodList.add(new CoffeeMug());
+	        
+	        try { // Insert your own directory to avoid errors. Filename extension must be .ser
+				File path = new File("/Users/Robert/git/ShoppingCart/Inventory.ser");
+				
+				if(!path.exists()) {
+					FileOutputStream fileOut = new FileOutputStream(path, true);
+					ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+					
+					for(Iterator<Product> itr = prodList.iterator(); itr.hasNext();) {
+						Product temp = itr.next();
+						objOut.writeObject(temp);
+					}
+					objOut.close();
+					fileOut.close();
+				}
+				else {
+					FileOutputStream fileOut = new FileOutputStream(path, true);
+					AppendToDB objOut = new AppendToDB(fileOut);
+					
+					for(Iterator<Product> itr = prodList.iterator(); itr.hasNext();) {
+						Product temp = itr.next();
+						objOut.writeObject(temp);
+					}
+					objOut.close();
+					fileOut.close();
+				}
+			}
+			catch(IOException i) {
+				i.printStackTrace();
+			}
 	    }
 	    
 	    public void addProduct(Product key) {
@@ -96,14 +139,5 @@ import java.util.ArrayList;
 	                                    // as an instance variable of the Product class?
 	    }
 	    
-	    public static void main(String[] args) {
-	     
-	       Inventory mainInventory = new Inventory();
-	       
-	       mainInventory.addProduct(new Umbrella());
-	       mainInventory.addProduct(new LegalPad());
-	       mainInventory.addProduct(new CoffeeMug());
-	       
-	       
-	    }
+
 	}

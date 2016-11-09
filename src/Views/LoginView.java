@@ -18,6 +18,9 @@ import javax.swing.*;
 
 import Models.Account;
 import Database.AppendToDB;
+import Inventory.Inventory;
+import Inventory.Product; 
+
 
 public class LoginView extends JFrame /*implements LayoutManager*/ {
 	public LoginView(){
@@ -42,7 +45,7 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 						ArrayList<Account> checkDB = new ArrayList<Account>();
 						
 						try { // Insert your own directory to avoid errors. Filename extension must be .ser
-							FileInputStream file_in = new FileInputStream("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
+							FileInputStream file_in = new FileInputStream("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
 							ObjectInputStream obj_in = new ObjectInputStream(file_in);
 							Account temp = (Account) obj_in.readObject();
 							
@@ -140,6 +143,10 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 	public static void main(String[] args){
 		
 		LoginView login = new LoginView();
+		
+		Inventory mainInventory = new Inventory();
+	       
+	    
 
 	}
 }

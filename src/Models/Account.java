@@ -67,7 +67,7 @@ public class Account implements java.io.Serializable {
 		LoginView login = new LoginView();
 		
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("C:/Users/Lectora Desktop/git/ShoppingCart/Login_Credentials.ser");
+			File path = new File("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
 			
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);

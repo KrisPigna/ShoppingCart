@@ -27,6 +27,7 @@ public class CreateAccountView extends JFrame {
 						String user = userField.getText();
 						String pw = pwField.getText();
 						Account temp = new Account(user, pw);
+						temp.setFrameState(getBounds());
 						temp.createAccount();
 						dispose();
 					}

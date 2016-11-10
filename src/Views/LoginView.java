@@ -36,6 +36,7 @@ public class LoginView extends JFrame {
 					public void actionPerformed(ActionEvent event){
 						dispose();
 						CreateAccountView create = new CreateAccountView();
+						create.setBounds(getBounds());
 					}
 		});
 		

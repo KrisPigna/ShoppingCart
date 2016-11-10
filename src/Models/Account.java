@@ -3,6 +3,7 @@ package Models;
 import Views.*;
 import Database.AppendToDB;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,11 +18,13 @@ public class Account implements java.io.Serializable {
 	public Account(){
 		username = null;
 		password = null;
+		frameState = null;
 	}
 	
 	public Account(String user, String pw){
 		username = user;
 		password = pw;
+		frameState = null;
 	}
 	
 	public String getUsername() {
@@ -30,6 +33,10 @@ public class Account implements java.io.Serializable {
 	
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public void setFrameState(Rectangle r){
+		frameState = r;
 	}
 	
 	@Override
@@ -64,7 +71,6 @@ public class Account implements java.io.Serializable {
 	}
 
 	public void createAccount(){
-		LoginView login = new LoginView();
 		
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
@@ -87,9 +93,13 @@ public class Account implements java.io.Serializable {
 		catch(IOException i) {
 			i.printStackTrace();
 		}
+		
+		LoginView login = new LoginView();
+		login.setBounds(frameState);
 	}
 		
 	private static final long serialVersionUID = 6622568068083351485L;
 	private String username;
 	private String password;
+	private Rectangle frameState;
 }

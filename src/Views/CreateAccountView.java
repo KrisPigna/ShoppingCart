@@ -10,11 +10,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Database.AppendToDB;
 import Models.Account;
 
-public class CreateAccountView extends JFrame {
+public class CreateAccountView extends JPanel {
 	public CreateAccountView(){
 		final JTextField userField = new JTextField(10);
 		final JTextField pwField = new JTextField(10);
@@ -27,9 +29,9 @@ public class CreateAccountView extends JFrame {
 						String user = userField.getText();
 						String pw = pwField.getText();
 						Account temp = new Account(user, pw);
-						temp.setFrameState(getBounds());
 						temp.createAccount();
-						dispose();
+						ChangeEvent evt = new ChangeEvent(event);
+						fireStateChanged(evt);
 					}
 		});
 		JPanel fields = new JPanel();
@@ -41,11 +43,24 @@ public class CreateAccountView extends JFrame {
 		JPanel buttons = new JPanel();
 		buttons.add(create);
 		this.setLayout(new BorderLayout());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(fields, BorderLayout.NORTH);
 		this.add(buttons, BorderLayout.SOUTH);
-		this.pack();
-		this.setVisible(true);
+		this.setVisible(false);
+	}
+	
+	//method to add a change listener to an object
+	public void addChangeListener(ChangeListener listener) {
+	    listenerList.add(ChangeListener.class, listener);
+	}
+	
+	//method to iterate through all existing change listeners and notify them of a state change
+	protected void fireStateChanged(ChangeEvent evt) {
+	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
+	    if (listeners != null && listeners.length > 0) {
+	        for (ChangeListener listener : listeners) {
+	            listener.stateChanged(evt);
+	        }
+	    }
 	}
 	
 }

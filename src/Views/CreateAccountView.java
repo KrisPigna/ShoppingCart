@@ -1,9 +1,5 @@
 package Views;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.nio.charset.Charset;
@@ -15,15 +11,15 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import javax.swing.JFrame;
-
 import Database.AppendToDB;
 import Models.Account;
 
-public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
+public class CreateAccountView extends JFrame {
 	public CreateAccountView(){
-		final JTextArea userField = new JTextArea(1,10);
-		final JTextArea pwField = new JTextArea(1,10);
+		final JTextField userField = new JTextField(10);
+		final JTextField pwField = new JTextField(10);
+		JLabel userLabel = new JLabel("Username:");
+		JLabel pwLabel = new JLabel("Password: ");
 		JButton create = new JButton("Create");
 		create.addActionListener(new
 				ActionListener(){
@@ -36,50 +32,19 @@ public class CreateAccountView extends JFrame /*implements LayoutManager*/ {
 					}
 		});
 		JPanel fields = new JPanel();
+		fields.setLayout(new GridLayout(2,2));
+		fields.add(userLabel);
 		fields.add(userField);
+		fields.add(pwLabel);
 		fields.add(pwField);
 		JPanel buttons = new JPanel();
 		buttons.add(create);
-		//JFrame frame = new JFrame();
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(fields, BorderLayout.CENTER);
+		this.add(fields, BorderLayout.NORTH);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.pack();
 		this.setVisible(true);
 	}
 	
-	public void Notify(){
-		this.setVisible(true);
-	}
-
-	/*@Override
-	public void addLayoutComponent(String arg0, Component arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void layoutContainer(Container arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Dimension minimumLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimension preferredLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeLayoutComponent(Component arg0) {
-		// TODO Auto-generated method stub
-
-	}*/
 }

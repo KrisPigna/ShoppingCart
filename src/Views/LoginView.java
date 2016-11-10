@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import Models.Account;
 import Database.AppendToDB;
@@ -22,10 +23,10 @@ import Inventory.Inventory;
 import Inventory.Product; 
 
 
-public class LoginView extends JFrame /*implements LayoutManager*/ {
+public class LoginView extends JFrame {
 	public LoginView(){
-		final JTextArea userField = new JTextArea(1,10);
-		final JTextArea pwField = new JTextArea(1,10);
+		final JTextField userField = new JTextField(10);
+		final JTextField pwField = new JTextField(10);
 		JLabel userLabel = new JLabel("Username:");
 		JLabel pwLabel = new JLabel("Password: ");
 		JButton login = new JButton("Login");
@@ -45,7 +46,7 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 						ArrayList<Account> checkDB = new ArrayList<Account>();
 						
 						try { // Insert your own directory to avoid errors. Filename extension must be .ser
-							FileInputStream file_in = new FileInputStream("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
+							FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 							ObjectInputStream obj_in = new ObjectInputStream(file_in);
 							Account temp = (Account) obj_in.readObject();
 							
@@ -89,15 +90,38 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		});
 		
 		JPanel fields = new JPanel();
-		//fields.setLayout(new GridLayout(2,2));
+		SpringLayout layout = new SpringLayout();
+		fields.setLayout(layout);
 		fields.add(userLabel);
 		fields.add(userField);
 		fields.add(pwLabel);
 		fields.add(pwField);
+		layout.putConstraint(SpringLayout.WEST, userLabel,
+                5, SpringLayout.WEST, fields);
+		layout.putConstraint(SpringLayout.NORTH, userLabel,
+                5, SpringLayout.NORTH, fields);
+		layout.putConstraint(SpringLayout.WEST, userField,
+                5,
+                SpringLayout.EAST, userLabel);
+		layout.putConstraint(SpringLayout.NORTH, userField,
+                5,
+                SpringLayout.NORTH, fields);
+		layout.putConstraint(SpringLayout.WEST, pwLabel,
+                5, SpringLayout.WEST, fields);
+		layout.putConstraint(SpringLayout.NORTH, pwLabel,
+                20, SpringLayout.NORTH, userLabel);
+		layout.putConstraint(SpringLayout.WEST, pwField,
+                5,
+                SpringLayout.EAST, pwLabel);
+		layout.putConstraint(SpringLayout.NORTH, pwField,
+                20,
+                SpringLayout.NORTH, userField);
+		fields.setPreferredSize(new Dimension(400,50));
+		fields.setMaximumSize(new Dimension(400,50));
+		fields.setBorder(BorderFactory.createEmptyBorder());
 		JPanel buttons = new JPanel();
 		buttons.add(login);
 		buttons.add(createAcct);
-		//JFrame frame = new JFrame();
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(fields, BorderLayout.CENTER);
@@ -106,39 +130,6 @@ public class LoginView extends JFrame /*implements LayoutManager*/ {
 		this.setVisible(true);
 	}
 	
-	public void Notify(){
-		this.setVisible(true);
-	}
-
-	/*@Override
-	public void addLayoutComponent(String arg0, Component arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void layoutContainer(Container arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Dimension minimumLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimension preferredLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeLayoutComponent(Component arg0) {
-		// TODO Auto-generated method stub
-
-	}*/
 	
 	public static void main(String[] args){
 		

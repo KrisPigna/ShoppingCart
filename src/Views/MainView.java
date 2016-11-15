@@ -10,6 +10,11 @@ import javax.swing.event.ChangeListener;
 import Inventory.Inventory;
 
 public class MainView extends JFrame {
+	
+	private LoginView loginView;
+	private CreateAccountView createView;
+	private CustomerInventoryView inventoryView;
+	
 	public MainView(){
 		
 		//create instances of every view
@@ -57,8 +62,4 @@ public class MainView extends JFrame {
 		Inventory mainInventory = new Inventory();
 
 	}
-	
-	private LoginView loginView;
-	private CreateAccountView createView;
-	private CustomerInventoryView inventoryView;
 }

@@ -88,7 +88,7 @@ import Database.AppendToDB;
 	        prodList.add(new CoffeeMug());
 	        
 	        try { // Insert your own directory to avoid errors. Filename extension must be .ser
-				File path = new File("/Users/Mario/git/ShoppingCart/Inventory.ser");
+				File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
 				
 				if(!path.exists()) {
 					FileOutputStream fileOut = new FileOutputStream(path, true);

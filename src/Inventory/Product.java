@@ -1,34 +1,10 @@
 package Inventory;
 
-public class Product implements Item {
+interface Item {
 
-	private double price;
-    public int qty;
-    private String description;
-    private String details;
-    
-    @Override
-    public double getPrice() {
-        return price;
-    }
-
-    @Override
-    public int getQty() {
-        return qty;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String displayDetails() {
-        return details;
-    }
-
-    @Override
-    public void hideDetails() {
-        // do something
-    }
+	public double getPrice();
+    public int getQty();
+    public String getDescription();
+    public String displayDetails(); // do we need this? check instructor comments
+    public void hideDetails(); // do we need this? check instructor comments
 }

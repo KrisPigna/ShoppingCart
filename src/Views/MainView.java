@@ -8,6 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Inventory.Inventory;
+import Inventory.Product;
 
 public class MainView extends JFrame {
 	
@@ -57,9 +58,12 @@ public class MainView extends JFrame {
 	
 	public static void main(String[] args){
 		
+		Inventory mainInventory = new Inventory();
 		MainView main = new MainView();
 	       
-		Inventory mainInventory = new Inventory();
+		
+		
+		
 
 	}
 }

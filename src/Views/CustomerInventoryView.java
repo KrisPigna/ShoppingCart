@@ -14,24 +14,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Inventory.Item;
 import Inventory.Product;
 
 public class CustomerInventoryView extends JPanel {
 	public CustomerInventoryView(){
 		
 		JLabel itemDisplay = new JLabel();
-		ArrayList<Product> inventory = new ArrayList<>();
+		ArrayList<Item> inventory = new ArrayList<>();
 		
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			FileInputStream file_in = new FileInputStream("C:/Users/Paul/git/ShoppingCart/Inventory.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
-			Product temp = (Product) obj_in.readObject();
+			Item temp = (Item) obj_in.readObject();
 					
 
 			try {
 				while(temp != null) {
 					inventory.add(temp);
-					temp = (Product) obj_in.readObject(); 
+					
+					itemDisplay = new JLabel(temp.getClass().getSimpleName());
+					
+					temp = (Item) obj_in.readObject(); 
 				}
 			} catch (EOFException e) {
 				file_in.close();
@@ -46,7 +50,7 @@ public class CustomerInventoryView extends JPanel {
 			e.printStackTrace();
 		}
 		
-		for(Product product: inventory) {
+		for(Item item: inventory) {
 			
 		}
 		

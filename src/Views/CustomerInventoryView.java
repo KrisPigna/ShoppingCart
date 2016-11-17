@@ -33,7 +33,7 @@ public class CustomerInventoryView extends JPanel {
 				while(temp != null) {
 					inventory.add(temp);
 					
-					itemDisplay = new JLabel(temp.getClass().getSimpleName());
+					itemDisplay = new JLabel(temp.getName());
 					
 					temp = (Item) obj_in.readObject(); 
 				}

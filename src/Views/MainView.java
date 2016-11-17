@@ -57,8 +57,6 @@ public class MainView extends JFrame {
 	}
 	
 	public static void main(String[] args){
-		
-		Inventory mainInventory = new Inventory();
 		MainView main = new MainView();
 	       
 		

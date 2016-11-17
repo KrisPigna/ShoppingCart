@@ -73,7 +73,7 @@ public class Account implements java.io.Serializable {
 	public void createAccount(){
 		
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("C:/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			File path = new File("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
@@ -99,7 +99,7 @@ public class Account implements java.io.Serializable {
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		boolean success = false;
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("C:/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			FileInputStream file_in = new FileInputStream("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			Account temp = (Account) obj_in.readObject();
 			

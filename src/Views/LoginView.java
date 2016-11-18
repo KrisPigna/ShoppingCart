@@ -64,7 +64,10 @@ public class LoginView extends JPanel {
 		JPanel buttons = new JPanel();
 		buttons.add(login);
 		buttons.add(createAcct);
+		JLabel header = new JLabel("Shop-A-Tron 5000");
+		header.setFont(new Font("Serif", Font.BOLD, 30));
 		this.setLayout(new BorderLayout());
+		this.add(header, BorderLayout.NORTH);
 		this.add(fields, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.setVisible(true);

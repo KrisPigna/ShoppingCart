@@ -20,12 +20,21 @@ import Database.AppendToDB;
 public class Inventory extends ConcreteList implements Serializable {
 	    
     public Inventory() {
-    	//inventory = ConcreteList.getList();
     	loadDB();
-        // hard code some inventory objects
+    	//************
+        // Hard coded products to initially populate inventory; remove comments
+    	// to add them at first, but comment out again to avoid adding them
+    	// over and over each time the program runs - Kris
+    	//************
+    	/*prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
+    	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
+    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));*/
         saveToDB();
     }
     
+    /**
+     * Un-serializes the stored prodList to repopulate the list.
+     */
     public void loadDB(){
     	try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("/Users/Mario/git/ShoppingCart/Inventory.ser");
@@ -37,6 +46,10 @@ public class Inventory extends ConcreteList implements Serializable {
 				objIn.close();
 				fileIn.close();
 			}
+			//************
+			// Commented this part out while testing; seems to work fine without it
+			// so I'm not sure if we really need it? - Kris
+			//************
 			/*else {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				AppendToDB objOut = new AppendToDB(fileOut);
@@ -56,10 +69,16 @@ public class Inventory extends ConcreteList implements Serializable {
 		}
     }
     
+    /**
+     * Serializes the current prodList for persistent storing.
+     */
     public void saveToDB(){
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("/Users/Mario/git/ShoppingCart/Inventory.ser");
-			
+			//************
+			// Commented bits and pieces out while testing; seems to work fine as is
+			// so I'm not sure if we really need the other bits? - Kris
+			//************
 			//if(path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, false);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -88,7 +107,6 @@ public class Inventory extends ConcreteList implements Serializable {
 			
 		}
     }
-    
-    //private ArrayList<Product> inventory;
+
     private static final long serialVersionUID = 1L;
 }

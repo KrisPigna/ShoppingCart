@@ -3,18 +3,18 @@ package Inventory;
 import java.io.Serializable;
 
 public class Product implements GenericProduct, Serializable {
-	/**
-	 * 
-	 */
+
 	public Product(){
 		name = null;
+		qty = 0;
 		sellPrice = 0;
 		wholesalePrice = 0;
 		details = null;
 	}
 	
-	public Product(String n, double p1, double p2, String d){
+	public Product(String n, int q, double p1, double p2, String d){
 		name = n;
+		qty = q;
 		sellPrice = p1;
 		wholesalePrice = p2;
 		details = d;
@@ -33,8 +33,7 @@ public class Product implements GenericProduct, Serializable {
 
 	@Override
 	public int getQty() {
-		// TODO Auto-generated method stub
-		return 0;
+		return qty;
 	}
 
 	@Override
@@ -56,6 +55,7 @@ public class Product implements GenericProduct, Serializable {
 	}
 	
 	private String name;
+	private int qty;
 	private double sellPrice;
 	private double wholesalePrice;
 	private String details;

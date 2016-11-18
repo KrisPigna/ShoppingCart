@@ -1,5 +1,6 @@
 package Views;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -51,6 +52,7 @@ public class MainView extends JFrame {
 		this.add(loginView);
 		this.add(createView);
 		this.add(inventoryView);
+		this.setPreferredSize(new Dimension(900, 600));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);

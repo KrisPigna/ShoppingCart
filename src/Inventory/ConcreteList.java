@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class ConcreteList implements ProductList {
-	
-	/*public static ArrayList<Product> getList(){
-		return prodList;
-	}*/
 
 	@Override
 	public void addProduct(Product key) {

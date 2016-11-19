@@ -10,7 +10,8 @@ public interface ProductList {
 	
 	public Product findProduct(Product key);
 	
-	public void updateQty(Product key);
+	public void updateQty(Product key, int newQty); // newQty may or may not be right, just thinking about rebuilding that
+														//dropdown
 	
 	public Iterator<Product> getIterator();
 	

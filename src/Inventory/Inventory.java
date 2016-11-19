@@ -63,34 +63,19 @@ public class Inventory extends ConcreteList implements Serializable {
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
 			/*
-			 * "!" got removed from path.exists(). If block is specifically for when file doesn't exist yet.
-			 * The if block creates it. Subsequent calls will then always land in the else block.
-			 * The two are different due to my "AppendToDB" class, used only in else block, replacing
-			 * ObjectOutputStream, 
-			 *  which ignores headers of subsequent
-			 * items added. The purpose of this was realized when building this code for verify login; 
-			 * it ensures the deserialized object has the same hashcode when it comes out as when it went in, 
-			 * and allows "appending" to the .ser file on separate occassions without overwriting it. 
-			 * We're now only adding the prodList, a single object, so while this isn't entirely necessary,
-			 * It's in place if we in fact wanted to add something else. 
-			 * It's also somewhat unnecessary for prodList, since we're not comparing anything, however
-			 * I felt it was good to use the same code for code and object consistency.  
-			 * - Paul
+			* My previous long explanation here may be further inapplicable. When something gets sold out,
+			* we'll update prodList and save it to DB again. I don't believe there's any point of appending
+			* different versions of the DB, so I'm changing this code back to the way you had it :). Turns out
+			* the AppendToDB class is good for the username/password only. If I'm not mistaken, the file will now
+			* just overwrite itself each time we serialize prodList, recreating a single updated database each time.
+			*
 			 */
-			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, false);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 				objOut.writeObject(prodList);
 				objOut.close();
 				fileOut.close();
-			}
-			else {
-				FileOutputStream fileOut = new FileOutputStream(path, true);
-				AppendToDB objOut = new AppendToDB(fileOut);
-				objOut.writeObject(prodList);
-				objOut.close();
-				fileOut.close();
-			}
+
 		} catch(IOException i) {
 			
 		}

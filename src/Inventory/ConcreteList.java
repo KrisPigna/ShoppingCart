@@ -28,7 +28,7 @@ public abstract class ConcreteList implements ProductList {
 	}
 
 	@Override
-	public void updateQty(Product key) {
+	public void updateQty(Product key, int newQty) {
 		 int loc = prodList.indexOf(key);
 	        
 	        //this.getQty(); // CHANGE THIS. update value getting passed in through MVC interaction?   

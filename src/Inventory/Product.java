@@ -50,7 +50,7 @@ public class Product implements GenericProduct, Serializable {
 	@Override
 	public String displayDetails() {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import Database.AppendToDB;
 public class Inventory extends ConcreteList implements Serializable {
 	    
     public Inventory() {
-    	loadDB(); 
+    	//loadDB(); 
     	//************
         // Hard coded products to initially populate inventory; remove comments
     	// to add them at first, but comment out again to avoid adding them

@@ -74,24 +74,27 @@ public class CustomerInventoryView extends JPanel {
 							public void actionPerformed(ActionEvent event){
 								//get the amount that the drop-down box is set to
 								int chosenQty = amount.getSelectedIndex();
-								Product selected = inv.findProduct(temp);
-								//get the current quantity of the product in inventory
-								int productQty = selected.getQty();
-								//set selected product quantity to selected amount
-								selected.setQty(chosenQty);
-								//and add it to the shopping cart
-								cart.addProduct(selected);
-								//set product inventory quantity to original amount minus selected amount
-								//********
-								// NOTE: this isn't working correctly at the moment; both "temp" and "selected"
-								// are still references to the same object, so it's reverting to quantity of the
-								// product in the cart to the same amount as the product in the inventory - Kris
-								//********
-								temp.setQty(productQty - chosenQty);
-								//save changes to inventory
-								inv.saveToDB();
-								//update total of contents in cart on the view
-								cartTotal.setText(Double.toString(cart.getTotal()));
+								
+								if(amount.getSelectedIndex() != 0) {
+									Product selected = inv.findProduct(temp);
+									//get the current quantity of the product in inventory
+									int productQty = selected.getQty();
+									//set selected product quantity to selected amount
+									selected.setQty(chosenQty);
+									//and add it to the shopping cart
+									cart.addProduct(selected);
+									//set product inventory quantity to original amount minus selected amount
+									//********
+									// NOTE: this isn't working correctly at the moment; both "temp" and "selected"
+									// are still references to the same object, so it's reverting to quantity of the
+									// product in the cart to the same amount as the product in the inventory - Kris
+									//********
+									temp.setQty(productQty - chosenQty);
+									//save changes to inventory
+									inv.saveToDB();
+									//update total of contents in cart on the view
+									cartTotal.setText(Double.toString(cart.getTotal()));
+								}
 							}
 				});
 				JPanel itemDisplay = new JPanel();

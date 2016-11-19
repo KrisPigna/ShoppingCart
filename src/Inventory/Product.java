@@ -35,6 +35,11 @@ public class Product implements GenericProduct, Serializable {
 	public int getQty() {
 		return qty;
 	}
+	
+	@Override
+	public void setQty(int key) {
+		qty = key;
+	}
 
 	@Override
 	public String getDescription() {

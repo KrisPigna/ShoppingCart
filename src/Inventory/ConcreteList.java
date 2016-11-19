@@ -54,7 +54,7 @@ public abstract class ConcreteList implements ProductList {
 	public double getTotal() {
 		double total = 0;
 		for (Product i : prodList){
-			total = total + i.getPrice();
+			total = total + (i.getPrice() * i.getQty());
 		}
 		return total;
 	}

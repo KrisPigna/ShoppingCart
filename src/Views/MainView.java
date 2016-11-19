@@ -10,32 +10,39 @@ import javax.swing.event.ChangeListener;
 
 import Inventory.Inventory;
 import Inventory.Product;
+import Models.ShoppingCart;
 
 public class MainView extends JFrame {
 	
 	private LoginView loginView;
 	private CreateAccountView createView;
-	private CustomerInventoryView inventoryView;
+	private CustomerInventoryView custInventoryView;
+	private Inventory mainInventory;
+	private ShoppingCart cart;
+	
 	
 	public MainView(){
+		//create instances of models
+		mainInventory = new Inventory();
+		cart = new ShoppingCart();
 		
 		//create instances of every view
 		loginView = new LoginView();
 		createView = new CreateAccountView();
-		inventoryView = new CustomerInventoryView();
+		custInventoryView = new CustomerInventoryView(mainInventory, cart);
 		
 		//add change listeners to each view
 		loginView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				//determines which button was clicked, for event branching
 				JButton temp = (JButton) event.getSource();
-				if(temp.getText() == "Create Account") {
+				if (temp.getText() == "Create Account") {
 					loginView.setVisible(false);
 					createView.setVisible(true);
 				}
-				if(temp.getText() == "Login") {
+				if (temp.getText() == "Login") {
 					loginView.setVisible(false);
-					inventoryView.setVisible(true);
+					custInventoryView.setVisible(true);
 				}
 			}
 		});
@@ -47,11 +54,20 @@ public class MainView extends JFrame {
 			}
 		});
 		
+		custInventoryView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton temp = (JButton) event.getSource();
+				if (temp.getText() == "Add to Cart"){
+					
+				}
+			}
+		});
+		
 		//Set layout and add each view to MainView frame; only LoginView is visible at first
 		this.setLayout(new FlowLayout());
 		this.add(loginView);
 		this.add(createView);
-		this.add(inventoryView);
+		this.add(custInventoryView);
 		this.setPreferredSize(new Dimension(900, 600));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

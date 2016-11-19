@@ -88,6 +88,8 @@ public class CustomerInventoryView extends JPanel {
 									// NOTE: this isn't working correctly at the moment; both "temp" and "selected"
 									// are still references to the same object, so it's reverting to quantity of the
 									// product in the cart to the same amount as the product in the inventory - Kris
+									
+									// I think this works the way you wanted it to now. Double Check me. - Paul
 									//********
 									temp.setQty(productQty - chosenQty);
 									//save changes to inventory

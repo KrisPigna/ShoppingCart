@@ -2,7 +2,12 @@ package Inventory;
 
 import java.io.Serializable;
 
-public class Product implements GenericProduct, Serializable {
+public class Product implements GenericProduct, Serializable, Cloneable {
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 
 	public Product(){
 		name = null;

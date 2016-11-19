@@ -17,8 +17,14 @@ public abstract class ConcreteList implements ProductList {
 
 	@Override
 	public Product findProduct(Product key) {
-		int loc = prodList.indexOf(key);
-		return prodList.get(loc);
+		Product temp = null;
+		try {
+			temp = (Product) key.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		
+		return temp;
 	}
 
 	@Override

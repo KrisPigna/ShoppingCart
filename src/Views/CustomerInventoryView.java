@@ -39,12 +39,13 @@ public class CustomerInventoryView extends JPanel {
 		JPanel products = buildInventoryList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(products);
 		productScroll.setPreferredSize(new Dimension(300, 400));
+		JButton checkout = new JButton("Checkout");
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
+		this.add(checkout, BorderLayout.SOUTH);
 		this.setPreferredSize(new Dimension(400, 450));
-		this.setVisible(false);
-		
+		this.setVisible(false);	
 	}
 	
 	/**

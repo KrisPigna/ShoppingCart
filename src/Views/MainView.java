@@ -71,6 +71,7 @@ public class MainView extends JFrame {
 		this.add(loginView);
 		this.add(createView);
 		this.add(custInventoryView);
+		this.add(chkOutView);
 		this.setPreferredSize(new Dimension(900, 600));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

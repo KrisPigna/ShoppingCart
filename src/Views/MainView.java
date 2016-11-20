@@ -17,6 +17,7 @@ public class MainView extends JFrame {
 	private LoginView loginView;
 	private CreateAccountView createView;
 	private CustomerInventoryView custInventoryView;
+	private CheckOutView chkOutView;
 	private Inventory mainInventory;
 	private ShoppingCart cart;
 	
@@ -30,6 +31,7 @@ public class MainView extends JFrame {
 		loginView = new LoginView();
 		createView = new CreateAccountView();
 		custInventoryView = new CustomerInventoryView(mainInventory, cart);
+		chkOutView = new CheckOutView(mainInventory, cart);
 		
 		//add change listeners to each view
 		loginView.addChangeListener(new ChangeListener() {
@@ -57,8 +59,9 @@ public class MainView extends JFrame {
 		custInventoryView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				JButton temp = (JButton) event.getSource();
-				if (temp.getText() == "Add to Cart"){
-					
+				if (temp.getText() == "Checkout"){
+					custInventoryView.setVisible(false);
+					chkOutView.setVisible(true);
 				}
 			}
 		});

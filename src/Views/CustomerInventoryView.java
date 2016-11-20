@@ -40,6 +40,15 @@ public class CustomerInventoryView extends JPanel {
 		JScrollPane productScroll = new JScrollPane(products);
 		productScroll.setPreferredSize(new Dimension(300, 400));
 		JButton checkout = new JButton("Checkout");
+		
+		checkout.addActionListener(new
+				ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						ChangeEvent evt = new ChangeEvent(checkout);
+						fireStateChanged(evt);
+					}
+		});
+		
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
@@ -85,8 +94,6 @@ public class CustomerInventoryView extends JPanel {
 									//and add it to the shopping cart
 									cart.addProduct(selected);
 									
-									
-									
 									//set product inventory quantity to original amount minus selected amount
 									//********
 									// NOTE: this isn't working correctly at the moment; both "temp" and "selected"
@@ -103,6 +110,9 @@ public class CustomerInventoryView extends JPanel {
 									inv.saveToDB();
 									//update total of contents in cart on the view
 									cartTotal.setText(Double.toString(cart.getTotal()));
+									
+									inv.updateQty(selected, (inv.findProduct(temp).getQty() - selected.getQty()));
+									System.out.println("after: " + inv.findProduct(temp).getQty());
 								}
 							}
 				});
@@ -111,7 +121,6 @@ public class CustomerInventoryView extends JPanel {
 				itemDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				itemDisplay.setBackground(Color.WHITE);
 				itemDisplay.setLayout(new FlowLayout());
-				itemDisplay.repaint();
 				itemDisplay.add(productName);
 				itemDisplay.add(amount);
 				itemDisplay.add(addToCart);

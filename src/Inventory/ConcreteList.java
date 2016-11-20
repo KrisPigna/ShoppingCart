@@ -29,11 +29,7 @@ public abstract class ConcreteList implements ProductList {
 
 	@Override
 	public void updateQty(Product key, int newQty) {
-		 int loc = prodList.indexOf(key);
-	        
-	        //this.getQty(); // CHANGE THIS. update value getting passed in through MVC interaction?   
-	                                    // is there a way to get around qty needing to be public here
-	                                    // as an instance variable of the Product class?
+		 key.setQty(newQty);
 	}
 	
 	 public Iterator<Product> getIterator()

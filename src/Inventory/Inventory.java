@@ -20,15 +20,15 @@ import Database.AppendToDB;
 public class Inventory extends ConcreteList implements Serializable {
 	    
     public Inventory() {
-    	//loadDB(); 
+    	loadDB(); 
     	//************
         // Hard coded products to initially populate inventory; remove comments
     	// to add them at first, but comment out again to avoid adding them
     	// over and over each time the program runs - Kris
     	//************
-    	prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
+    	/*prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
     	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
-    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));
+    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));*/
         saveToDB();
     }
     
@@ -39,7 +39,7 @@ public class Inventory extends ConcreteList implements Serializable {
     //			However, we'll keep it because it should be here. Call in the default constructor is not needed.
     public void loadDB(){
     	try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/Inventory.ser");
 			
 			if(path.exists()) {
 				FileInputStream fileIn = new FileInputStream(path);
@@ -61,7 +61,7 @@ public class Inventory extends ConcreteList implements Serializable {
      */
     public void saveToDB(){
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/Inventory.ser");
 			/*
 			* My previous long explanation here may be further inapplicable. When something gets sold out,
 			* we'll update prodList and save it to DB again. I don't believe there's any point of appending

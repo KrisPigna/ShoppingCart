@@ -24,11 +24,13 @@ public class Account implements java.io.Serializable {
 	public Account(){
 		username = null;
 		password = null;
+		seller = false;
 	}
 	
 	public Account(String user, String pw){
 		username = user;
 		password = pw;
+		seller = false;
 	}
 	
 	public String getUsername() {
@@ -37,6 +39,10 @@ public class Account implements java.io.Serializable {
 	
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public boolean getType() {
+		return seller;
 	}
 	
 	@Override
@@ -73,8 +79,13 @@ public class Account implements java.io.Serializable {
 	public void createAccount(){
 		
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("C:/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
-			
+			File path = new File("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
+			//********
+			// Uncomment this line to create a seller-type account, then
+			// re-comment it so all accounts created are customer-type
+			// - Kris
+			//********
+			//seller = true;
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -95,11 +106,10 @@ public class Account implements java.io.Serializable {
 		}
 	}
 	
-	public boolean loginAccount(){
+	public int loginAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
-		boolean success = false;
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("C:/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			FileInputStream file_in = new FileInputStream("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			Account temp = (Account) obj_in.readObject();
 			
@@ -122,10 +132,15 @@ public class Account implements java.io.Serializable {
 					// if the objects are equals.
 					//System.out.println("HashCode: " + this.hashCode());
 					//System.out.println("HashCode: " + account.hashCode());
-					success = true;
-				}
-				else{ //login failed, returns false
-					success = false;
+					
+					//if account type is customer, returns 1 to proceed to custInventoryView
+					if (account.getType() == false) {
+						return 1;
+					}
+					//if account type is seller, returns 2 to proceed to invMangView
+					if (account.getType() == true) {
+						return 2;
+					}
 				}
 			}
 			
@@ -136,11 +151,12 @@ public class Account implements java.io.Serializable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} 
-		
-		return success;
+		//if login fails, returns 0
+		return 0;
 	}
 		
 	private static final long serialVersionUID = 6622568068083351485L;
 	private String username;
 	private String password;
+	private boolean seller;
 }

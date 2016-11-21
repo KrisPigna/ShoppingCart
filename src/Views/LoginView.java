@@ -36,7 +36,7 @@ public class LoginView extends JPanel {
 		createAcct.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						ChangeEvent evt = new ChangeEvent(createAcct);
+						ChangeEvent evt = new ChangeEvent(3);
 						fireStateChanged(evt);
 					}
 		});
@@ -46,8 +46,12 @@ public class LoginView extends JPanel {
 					public void actionPerformed(ActionEvent event) {
 						Account checkLogin = new Account(userField.getText(), pwField.getText());
 						//if loginAccount() returns true, login was successful and fireStateChanged called
-						if (checkLogin.loginAccount() == true){
-							ChangeEvent evt = new ChangeEvent(login);
+						if (checkLogin.loginAccount() == 1){
+							ChangeEvent evt = new ChangeEvent(1);
+							fireStateChanged(evt);
+						}
+						if (checkLogin.loginAccount() == 2){
+							ChangeEvent evt = new ChangeEvent(2);
 							fireStateChanged(evt);
 						}
 					}

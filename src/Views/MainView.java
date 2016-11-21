@@ -18,6 +18,8 @@ public class MainView extends JFrame {
 	private CreateAccountView createView;
 	private CustomerInventoryView custInventoryView;
 	private CheckOutView chkOutView;
+	private InventoryManagementView invMangView;
+	private EditAddProductView addProductView;
 	private Inventory mainInventory;
 	private ShoppingCart cart;
 	
@@ -32,19 +34,26 @@ public class MainView extends JFrame {
 		createView = new CreateAccountView();
 		custInventoryView = new CustomerInventoryView(mainInventory, cart);
 		chkOutView = new CheckOutView(mainInventory, cart);
+		invMangView = new InventoryManagementView(mainInventory);
+		addProductView = new EditAddProductView(mainInventory);
 		
 		//add change listeners to each view
 		loginView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				//determines which button was clicked, for event branching
-				JButton temp = (JButton) event.getSource();
-				if (temp.getText() == "Create Account") {
+				// determines which button was clicked, for event branching, and
+				// whether a successful login was customer-type or seller-type
+				int temp = (int) event.getSource();
+				if (temp == 3) {
 					loginView.setVisible(false);
 					createView.setVisible(true);
 				}
-				if (temp.getText() == "Login") {
+				if (temp == 1) {
 					loginView.setVisible(false);
 					custInventoryView.setVisible(true);
+				}
+				if (temp == 2) {
+					loginView.setVisible(false);
+					invMangView.setVisible(true);
 				}
 			}
 		});
@@ -66,12 +75,36 @@ public class MainView extends JFrame {
 			}
 		});
 		
+		invMangView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton temp = (JButton) event.getSource();
+				if (temp.getText() == "Add New Product"){
+					addProductView.updateView(mainInventory);
+					invMangView.setVisible(false);
+					addProductView.setVisible(true);
+				}
+			}
+		});
+		
+		addProductView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton temp = (JButton) event.getSource();
+				if (temp.getText() == "Create Product"){
+					invMangView.updateView(mainInventory);
+					addProductView.setVisible(false);
+					invMangView.setVisible(true);
+				}
+			}
+		});
+		
 		//Set layout and add each view to MainView frame; only LoginView is visible at first
 		this.setLayout(new FlowLayout());
 		this.add(loginView);
 		this.add(createView);
 		this.add(custInventoryView);
 		this.add(chkOutView);
+		this.add(invMangView);
+		this.add(addProductView);
 		this.setPreferredSize(new Dimension(900, 600));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

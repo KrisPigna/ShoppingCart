@@ -109,7 +109,7 @@ public class CustomerInventoryView extends JPanel {
 									//save changes to inventory
 									inv.saveToDB();
 									//update total of contents in cart on the view
-									cartTotal.setText(Double.toString(cart.getTotal()));
+									cartTotal.setText(Double.toString(cart.getSellTotal()));
 									
 									inv.updateQty(selected, (inv.findProduct(temp).getQty() - selected.getQty()));
 									System.out.println("after: " + inv.findProduct(temp).getQty());

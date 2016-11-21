@@ -20,6 +20,7 @@ public class MainView extends JFrame {
 	private CheckOutView chkOutView;
 	private InventoryManagementView invMangView;
 	private EditAddProductView addProductView;
+	private SalesDataView salesDataView;
 	private Inventory mainInventory;
 	private ShoppingCart cart;
 	
@@ -36,6 +37,7 @@ public class MainView extends JFrame {
 		chkOutView = new CheckOutView(mainInventory, cart);
 		invMangView = new InventoryManagementView(mainInventory);
 		addProductView = new EditAddProductView(mainInventory);
+		salesDataView = new SalesDataView(mainInventory);
 		
 		//add change listeners to each view
 		loginView.addChangeListener(new ChangeListener() {
@@ -83,6 +85,11 @@ public class MainView extends JFrame {
 					invMangView.setVisible(false);
 					addProductView.setVisible(true);
 				}
+				if (temp.getText() == "Review Sales Data"){
+					salesDataView.updateView(mainInventory);
+					invMangView.setVisible(false);
+					salesDataView.setVisible(true);
+				}
 			}
 		});
 		
@@ -97,6 +104,17 @@ public class MainView extends JFrame {
 			}
 		});
 		
+		salesDataView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton temp = (JButton) event.getSource();
+				if (temp.getText() == "Inventory Management"){
+					invMangView.updateView(mainInventory);
+					salesDataView.setVisible(false);
+					invMangView.setVisible(true);
+				}
+			}
+		});
+		
 		//Set layout and add each view to MainView frame; only LoginView is visible at first
 		this.setLayout(new FlowLayout());
 		this.add(loginView);
@@ -105,6 +123,7 @@ public class MainView extends JFrame {
 		this.add(chkOutView);
 		this.add(invMangView);
 		this.add(addProductView);
+		this.add(salesDataView);
 		this.setPreferredSize(new Dimension(900, 600));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();

@@ -2,7 +2,8 @@ package Inventory;
 
 interface GenericProduct {
 	public String getName();
-	public double getPrice();
+	public double getSellPrice();
+	public double getWholesalePrice();
     public int getQty();
     public void setQty(int key);
     public String getDescription();

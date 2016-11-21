@@ -32,8 +32,13 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 	}
 	
 	@Override
-	public double getPrice() {
+	public double getSellPrice() {
 		return sellPrice;
+	}
+	
+	@Override
+	public double getWholesalePrice() {
+		return wholesalePrice;
 	}
 
 	@Override

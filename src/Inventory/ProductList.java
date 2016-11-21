@@ -15,5 +15,7 @@ public interface ProductList {
 	
 	public Iterator<Product> getIterator();
 	
-	public double getTotal();
+	public double getSellTotal();
+	
+	public double getWholesaleTotal();
 }

@@ -42,6 +42,13 @@ public class InventoryManagementView extends JPanel {
 					}
 		});
 		JButton salesData = new JButton("Review Sales Data");
+		salesData.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(salesData);
+						fireStateChanged(evt);
+					}
+		});
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		buttons.add(addProduct);
@@ -104,6 +111,13 @@ public class InventoryManagementView extends JPanel {
 					}
 		});
 		JButton salesData = new JButton("Review Sales Data");
+		salesData.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(salesData);
+						fireStateChanged(evt);
+					}
+		});
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		buttons.add(addProduct);

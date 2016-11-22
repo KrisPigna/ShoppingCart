@@ -63,6 +63,52 @@ public class EditAddProductView extends JPanel {
 		this.setVisible(false);
 	}
 	
+	public void editProduct(Inventory inv, Product prod) {
+		final JTextField name = new JTextField(prod.getName());
+		final JTextField quantity = new JTextField(Integer.toString(prod.getQty()));
+		final JTextField sellPrice = new JTextField(Double.toString(prod.getSellPrice()));
+		final JTextField wholePrice = new JTextField(Double.toString(prod.getWholesalePrice()));
+		final JTextField details = new JTextField(prod.getDescription());
+		JLabel nameLabel = new JLabel("Name: ");
+		JLabel qtyLabel = new JLabel("Quantity: ");
+		JLabel sellLabel = new JLabel("Selling Price: ");
+		JLabel wholeLabel = new JLabel("Wholesale Price: ");
+		JLabel detailsLabel = new JLabel("Description: ");
+		JButton saveProd = new JButton("Save Product");
+		saveProd.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						prod.updateProduct(
+								name.getText(), 
+								Integer.parseInt(quantity.getText()),
+								Double.parseDouble(sellPrice.getText()),
+								Double.parseDouble(wholePrice.getText()),
+								details.getText());
+						inv.saveToDB();
+						ChangeEvent evt = new ChangeEvent(saveProd);
+						fireStateChanged(evt);
+					}
+		});
+		JPanel fields = new JPanel();
+		fields.setLayout(new GridLayout(5,2));
+		fields.add(nameLabel);
+		fields.add(name);
+		fields.add(qtyLabel);
+		fields.add(quantity);
+		fields.add(sellLabel);
+		fields.add(sellPrice);
+		fields.add(wholeLabel);
+		fields.add(wholePrice);
+		fields.add(detailsLabel);
+		fields.add(details);
+		JPanel buttons = new JPanel();
+		buttons.add(saveProd);
+		this.setLayout(new BorderLayout());
+		this.add(fields, BorderLayout.NORTH);
+		this.add(buttons, BorderLayout.SOUTH);
+		this.setVisible(false);
+	}
+	
 	/**
 	 * Re-creates the view after a state-change to update its contents
 	 * @param inv Inventory object to add products to

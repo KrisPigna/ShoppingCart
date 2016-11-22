@@ -29,18 +29,7 @@ public class SalesDataView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
-		BarChart bar1 = new BarChart((int) inv.getWholesaleTotal(), Color.RED);
-		BarChart bar2 = new BarChart(200, Color.GREEN);
-		BarChart bar3 = new BarChart(200, Color.BLUE);
-		JLabel label1 = new JLabel("Costs: ", bar1, JLabel.LEFT);
-		JLabel label2 = new JLabel("Revenue: ", bar2, JLabel.LEFT);
-		JLabel label3 = new JLabel("Profit: ", bar3, JLabel.LEFT);
-		JPanel chart = new JPanel();
-		chart.setLayout(new BoxLayout(chart, BoxLayout.Y_AXIS));
-		chart.setPreferredSize(new Dimension(400,100));
-		chart.add(label1);
-		chart.add(label2);
-		chart.add(label3);
+		JPanel chart = populateBarChart((int) inv.getWholesaleTotal(), 25, 100);
 		JButton invMang = new JButton("Inventory Management");
 		invMang.addActionListener(new
 				ActionListener(){
@@ -70,18 +59,7 @@ public class SalesDataView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
-		BarChart bar1 = new BarChart((int) inv.getWholesaleTotal(), Color.RED);
-		BarChart bar2 = new BarChart(200, Color.GREEN);
-		BarChart bar3 = new BarChart(200, Color.BLUE);
-		JLabel label1 = new JLabel("Costs: ", bar1, JLabel.LEFT);
-		JLabel label2 = new JLabel("Revenue: ", bar2, JLabel.LEFT);
-		JLabel label3 = new JLabel("Profit: ", bar3, JLabel.LEFT);
-		JPanel chart = new JPanel();
-		chart.setLayout(new BoxLayout(chart, BoxLayout.Y_AXIS));
-		chart.setPreferredSize(new Dimension(400,100));
-		chart.add(label1);
-		chart.add(label2);
-		chart.add(label3);
+		JPanel chart = populateBarChart((int) inv.getWholesaleTotal(), 25, 100);
 		JButton invMang = new JButton("Inventory Management");
 		invMang.addActionListener(new
 				ActionListener(){
@@ -97,6 +75,28 @@ public class SalesDataView extends JPanel {
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 		
+	}
+	
+	public JPanel populateBarChart(int c, int r, int p) {
+		BarChart bar1 = new BarChart(c, Color.RED);
+		BarChart bar2 = new BarChart(r, Color.GREEN);
+		BarChart bar3 = new BarChart(p, Color.BLUE);
+		JLabel label1 = new JLabel(bar1, JLabel.LEFT);
+		JLabel label2 = new JLabel(bar2, JLabel.LEFT);
+		JLabel label3 = new JLabel(bar3, JLabel.LEFT);
+		JLabel cost = new JLabel("Costs: ");
+		JLabel revenue = new JLabel("Revenues: ");
+		JLabel profit = new JLabel("Profit: ");
+		JPanel chart = new JPanel();
+		chart.setLayout(new BoxLayout(chart, BoxLayout.Y_AXIS));
+		chart.setPreferredSize(new Dimension(400,100));
+		chart.add(cost);
+		chart.add(label1);
+		chart.add(revenue);
+		chart.add(label2);
+		chart.add(profit);
+		chart.add(label3);
+		return chart;
 	}
 	
 	//method to add a change listener to an object

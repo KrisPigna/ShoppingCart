@@ -79,16 +79,26 @@ public class MainView extends JFrame {
 		
 		invMangView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				JButton temp = (JButton) event.getSource();
-				if (temp.getText() == "Add New Product"){
-					addProductView.updateView(mainInventory);
+				JButton btn = new JButton();
+				Product prod = new Product();
+				if (event.getSource().getClass() == btn.getClass()) {
+					btn = (JButton) event.getSource();
+					if (btn.getText() == "Add New Product"){
+						addProductView.updateView(mainInventory);
+						invMangView.setVisible(false);
+						addProductView.setVisible(true);
+					}
+					if (btn.getText() == "Review Sales Data"){
+						salesDataView.updateView(mainInventory);
+						invMangView.setVisible(false);
+						salesDataView.setVisible(true);
+					}
+				}
+				if (event.getSource().getClass() == prod.getClass()) {
+					prod = (Product) event.getSource();
+					addProductView.editProduct(mainInventory, prod);
 					invMangView.setVisible(false);
 					addProductView.setVisible(true);
-				}
-				if (temp.getText() == "Review Sales Data"){
-					salesDataView.updateView(mainInventory);
-					invMangView.setVisible(false);
-					salesDataView.setVisible(true);
 				}
 			}
 		});
@@ -97,6 +107,11 @@ public class MainView extends JFrame {
 			public void stateChanged(ChangeEvent event) {
 				JButton temp = (JButton) event.getSource();
 				if (temp.getText() == "Create Product"){
+					invMangView.updateView(mainInventory);
+					addProductView.setVisible(false);
+					invMangView.setVisible(true);
+				}
+				if (temp.getText() == "Save Product"){
 					invMangView.updateView(mainInventory);
 					addProductView.setVisible(false);
 					invMangView.setVisible(true);

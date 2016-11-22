@@ -40,6 +40,14 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 	public double getWholesalePrice() {
 		return wholesalePrice;
 	}
+	
+	public void updateProduct(String n, int q, double p1, double p2, String d) {
+		name = n;
+		qty = q;
+		sellPrice = p1;
+		wholesalePrice = p2;
+		details = d;
+	}
 
 	@Override
 	public int getQty() {
@@ -53,8 +61,7 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return details;
 	}
 
 	@Override

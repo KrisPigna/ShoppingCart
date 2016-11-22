@@ -71,9 +71,16 @@ public class InventoryManagementView extends JPanel {
 		JPanel products = new JPanel();
 		products.setLayout(new GridLayout(0,1,0,5));
 		while(i.hasNext()) {
-			final Product temp = i.next();
+				final Product temp = i.next();
 				JLabel productName = new JLabel(temp.getName());
 				JButton edit = new JButton("Edit");
+				edit.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(temp);
+						fireStateChanged(evt);
+					}
+				});
 				JPanel itemDisplay = new JPanel();
 				itemDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				itemDisplay.setBackground(Color.WHITE);

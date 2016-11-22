@@ -57,13 +57,26 @@ public class MainView extends JFrame {
 					loginView.setVisible(false);
 					invMangView.setVisible(true);
 				}
+				if (temp == 0) {
+					boolean failed = true;
+					loginView.updateView(failed);
+					loginView.setVisible(true);
+				}
 			}
 		});
 		
 		createView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				createView.setVisible(false);
-				loginView.setVisible(true);
+				int success = (int) event.getSource();
+				if (success == 1) {
+					createView.setVisible(false);
+					loginView.setVisible(true);
+				}
+				if (success == 0) {
+					boolean failed = true;
+					createView.updateView(failed);
+					createView.setVisible(true);
+				}
 			}
 		});
 		

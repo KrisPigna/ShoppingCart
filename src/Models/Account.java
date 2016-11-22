@@ -76,9 +76,31 @@ public class Account implements java.io.Serializable {
 		return true;
 	}
 
-	public void createAccount(){
-		
-		try { // Insert your own directory to avoid errors. Filename extension must be .ser
+	public boolean createAccount(){
+		ArrayList<Account> checkDB = new ArrayList<Account>();
+		try { 
+			// Insert your own directory to avoid errors. Filename extension must be .ser
+			FileInputStream file_in = new FileInputStream("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
+			ObjectInputStream obj_in = new ObjectInputStream(file_in);
+			Account temp = (Account) obj_in.readObject();
+			
+			try {
+				while (temp != null) {
+					checkDB.add(temp);
+					temp = (Account) obj_in.readObject();
+				}
+			} catch (EOFException e) {
+				file_in.close();
+				obj_in.close();
+			}
+			
+			for (Iterator<Account> it = checkDB.iterator(); it.hasNext();) {
+				Account account = it.next();
+				if(this.getUsername().equals(account.getUsername()) || this.getPassword().equals(account.getPassword())) {
+					return false;
+				}
+			}
+			// Insert your own directory to avoid errors. Filename extension must be .ser
 			File path = new File("C:/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			//********
 			// Uncomment this line to create a seller-type account, then
@@ -100,10 +122,14 @@ public class Account implements java.io.Serializable {
 				objOut.close();
 				fileOut.close();
 			}
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
-		catch(IOException i) {
-			i.printStackTrace();
-		}
+		return true;
 	}
 	
 	public int loginAccount(){

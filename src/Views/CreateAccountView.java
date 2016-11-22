@@ -26,12 +26,16 @@ public class CreateAccountView extends JPanel {
 		create.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						String user = userField.getText();
-						String pw = pwField.getText();
-						Account temp = new Account(user, pw);
-						temp.createAccount();
-						ChangeEvent evt = new ChangeEvent(event);
-						fireStateChanged(evt);
+						Account temp = new Account(userField.getText(), pwField.getText());
+						boolean success = temp.createAccount();
+						if (success == true) {
+							ChangeEvent evt = new ChangeEvent(1);
+							fireStateChanged(evt);
+						}
+						else {
+							ChangeEvent evt = new ChangeEvent(0);
+							fireStateChanged(evt);
+						}
 					}
 		});
 		JPanel fields = new JPanel();
@@ -44,6 +48,50 @@ public class CreateAccountView extends JPanel {
 		buttons.add(create);
 		this.setLayout(new BorderLayout());
 		this.add(fields, BorderLayout.NORTH);
+		this.add(buttons, BorderLayout.SOUTH);
+		this.setVisible(false);
+	}
+	
+	public void updateView(boolean fail) {
+		this.removeAll();
+		final JTextField userField = new JTextField(10);
+		final JTextField pwField = new JTextField(10);
+		JLabel failed = new JLabel("Username or password already exists. Please try again.");
+		failed.setForeground(Color.RED);
+		JLabel userLabel = new JLabel("Username:");
+		JLabel pwLabel = new JLabel("Password: ");
+		JButton create = new JButton("Create");
+		create.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						Account temp = new Account(userField.getText(), pwField.getText());
+						boolean success = temp.createAccount();
+						if (success == true) {
+							ChangeEvent evt = new ChangeEvent(1);
+							fireStateChanged(evt);
+						}
+						else {
+							ChangeEvent evt = new ChangeEvent(0);
+							fireStateChanged(evt);
+						}
+					}
+		});
+		JPanel center = new JPanel();
+		center.setLayout(new BoxLayout(center, 1));
+		if (fail == true) {
+			center.add(failed);
+		}
+		JPanel fields = new JPanel();
+		fields.setLayout(new GridLayout(2,2));
+		fields.add(userLabel);
+		fields.add(userField);
+		fields.add(pwLabel);
+		fields.add(pwField);
+		JPanel buttons = new JPanel();
+		buttons.add(create);
+		center.add(fields);
+		this.setLayout(new BorderLayout());
+		this.add(center, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.setVisible(false);
 	}

@@ -76,8 +76,19 @@ public class CustomerInventoryView extends JPanel {
 				for (int j = 1; j <= temp.getQty(); j++) {
 					quantity[j] = Integer.toString(j);
 				}
+				JLabel price = new JLabel("$" + Double.toString(temp.getSellPrice()));
 				JLabel productName = new JLabel(temp.getName());
+				JLabel description = new JLabel(temp.getDescription());
+				description.setVisible(false);
 				JComboBox amount = new JComboBox(quantity);
+				JButton viewDetails = new JButton("View Details");
+				viewDetails.addActionListener(new
+						ActionListener(){
+							public void actionPerformed(ActionEvent event){
+								ChangeEvent evt = new ChangeEvent(description);
+								fireStateChanged(evt);
+							}
+				});
 				JButton addToCart = new JButton("Add to Cart");
 				addToCart.addActionListener(new
 						ActionListener(){
@@ -122,8 +133,11 @@ public class CustomerInventoryView extends JPanel {
 				itemDisplay.setBackground(Color.WHITE);
 				itemDisplay.setLayout(new FlowLayout());
 				itemDisplay.add(productName);
+				itemDisplay.add(price);
 				itemDisplay.add(amount);
+				itemDisplay.add(viewDetails);
 				itemDisplay.add(addToCart);
+				itemDisplay.add(description);
 				products.add(itemDisplay);
 			}
 		}

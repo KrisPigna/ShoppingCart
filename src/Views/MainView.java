@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -82,10 +83,15 @@ public class MainView extends JFrame {
 		
 		custInventoryView.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				JButton temp = (JButton) event.getSource();
-				if (temp.getText() == "Checkout"){
+				JButton btn = new JButton();
+				JLabel label = new JLabel();
+				if (event.getSource().getClass() == btn.getClass()) {
 					custInventoryView.setVisible(false);
 					chkOutView.setVisible(true);
+				}
+				if (event.getSource().getClass() == label.getClass()) {
+					label = (JLabel) event.getSource();
+					label.setVisible(true);
 				}
 			}
 		});

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -44,7 +45,7 @@ public class EditAddProductView extends JPanel {
 					}
 		});
 		JPanel fields = new JPanel();
-		fields.setLayout(new GridLayout(5,2));
+		fields.setLayout(new SpringLayout());
 		fields.add(nameLabel);
 		fields.add(name);
 		fields.add(qtyLabel);

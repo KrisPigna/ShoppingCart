@@ -26,6 +26,7 @@ import Inventory.Product;
 import Models.ShoppingCart;
 
 public class CustomerInventoryView extends JPanel {
+	
 	public CustomerInventoryView(Inventory inv, ShoppingCart cart){
 		JLabel total = new JLabel("Cart total: $");
 		cartTotal = new JLabel("0");
@@ -104,24 +105,12 @@ public class CustomerInventoryView extends JPanel {
 									selected.setQty(chosenQty);
 									//and add it to the shopping cart
 									cart.addProduct(selected);
-									
-									//set product inventory quantity to original amount minus selected amount
-									//********
-									// NOTE: this isn't working correctly at the moment; both "temp" and "selected"
-									// are still references to the same object, so it's reverting to quantity of the
-									// product in the cart to the same amount as the product in the inventory - Kris
-									
-									// I think this works the way you wanted it to now. Double Check me. - Paul
-									//********
 									temp.setQty(productQty - chosenQty);
-									
-									
-									
 									//save changes to inventory
 									inv.saveToDB();
 									//update total of contents in cart on the view
 									cartTotal.setText(Double.toString(cart.getSellTotal()));
-									
+	
 									inv.updateQty(selected, (inv.findProduct(temp).getQty() - selected.getQty()));
 									System.out.println("after: " + inv.findProduct(temp).getQty());
 								}
@@ -157,6 +146,10 @@ public class CustomerInventoryView extends JPanel {
 	            listener.stateChanged(evt);
 	        }
 	    }
+	}
+	
+	public JLabel getCartTotal() {
+		return cartTotal;
 	}
 	
 	private JLabel cartTotal;

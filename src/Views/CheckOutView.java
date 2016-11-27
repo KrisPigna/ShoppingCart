@@ -25,8 +25,10 @@ import Models.ShoppingCart;
 
 public class CheckOutView extends JPanel {
 
+	// WANT TO ADD: a back button to return from checkOutView back to CustomerInventory view, in order to add additional items to cart.
+	// Will need to refresh CustomerInventoryView in case anything has been removed from cart. 
+	
 	public CheckOutView(Inventory inv, ShoppingCart cart) {
-		/* NOTE TO SELF: why is cart total now not displaying on CustomerInventoryView now that I've added it here? */	
 		JLabel total = new JLabel("Cart total: $");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		checkOutTotal = new JLabel("0");
@@ -61,12 +63,12 @@ public class CheckOutView extends JPanel {
 		JPanel cartList = buildCartList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(cartList);
 		productScroll.setPreferredSize(new Dimension(300, 400));
-		JButton checkout = new JButton("Checkout");
+		JButton submitOrder = new JButton("Submit Order");
 		
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
-		this.add(checkout, BorderLayout.SOUTH);
+		this.add(submitOrder, BorderLayout.SOUTH);
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 	}
@@ -78,23 +80,29 @@ public class CheckOutView extends JPanel {
 		while(i.hasNext()) {
 				final Product temp = i.next();
 				JLabel productName = new JLabel(temp.getName());
-//				JButton edit = new JButton("Edit");
-//				edit.addActionListener(new
-//				ActionListener(){
-//					public void actionPerformed(ActionEvent event){
-//						ChangeEvent evt = new ChangeEvent(temp);
-//						fireStateChanged(evt);
-//					}
-//				});
+				JLabel qty = new JLabel(" -  Qty: ");
+				JLabel qtyOf = new JLabel(Integer.toString(temp.getQty()));
+				JButton remove = new JButton("Remove");
 				JPanel itemDisplay = new JPanel();
+				
+				remove.addActionListener(new
+						ActionListener(){
+							public void actionPerformed(ActionEvent event){
+								// TO-DO add item removed from cart back into inventory
+							}
+				});
+				
 				itemDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				itemDisplay.setBackground(Color.WHITE);
 				itemDisplay.setLayout(new FlowLayout());
-				itemDisplay.repaint();
 				itemDisplay.add(productName);
-				//itemDisplay.add(edit);
+				itemDisplay.add(qty);
+				itemDisplay.add(qtyOf);
+				itemDisplay.add(remove);
+				itemDisplay.repaint();
 				cartList.add(itemDisplay);
-			}
+		}
+		
 		return cartList;
 	}
 

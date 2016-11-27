@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class ConcreteList implements ProductList {
-
 	@Override
 	public void addProduct(Product key) {
 		prodList.add(key);

@@ -87,6 +87,7 @@ public class MainView extends JFrame {
 				JLabel label = new JLabel();
 				if (event.getSource().getClass() == btn.getClass()) {
 					custInventoryView.setVisible(false);
+					chkOutView.RefreshCheckOutView(mainInventory, cart);
 					chkOutView.setVisible(true);
 				}
 				if (event.getSource().getClass() == label.getClass()) {

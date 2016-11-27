@@ -110,9 +110,9 @@ public class CustomerInventoryView extends JPanel {
 									inv.saveToDB();
 									//update total of contents in cart on the view
 									cartTotal.setText(Double.toString(cart.getSellTotal()));
-	
-									inv.updateQty(selected, (inv.findProduct(temp).getQty() - selected.getQty()));
-									System.out.println("after: " + inv.findProduct(temp).getQty());
+									CheckOutView.setCheckOutTotal(cartTotal.getText());
+									//inv.updateQty(selected, (inv.findProduct(temp).getQty() - selected.getQty()));
+									//System.out.println("after: " + inv.findProduct(temp).getQty());
 								}
 							}
 				});
@@ -148,9 +148,5 @@ public class CustomerInventoryView extends JPanel {
 	    }
 	}
 	
-	public JLabel getCartTotal() {
-		return cartTotal;
-	}
-	
-	private JLabel cartTotal;
+	private static JLabel cartTotal;
 }

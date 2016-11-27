@@ -35,8 +35,7 @@ public class MainView extends JFrame {
 		loginView = new LoginView();
 		createView = new CreateAccountView();
 		custInventoryView = new CustomerInventoryView(mainInventory, cart);
-		JLabel cartTotal = custInventoryView.getCartTotal();
-		chkOutView = new CheckOutView(mainInventory, cart, cartTotal);
+		chkOutView = new CheckOutView(mainInventory, cart);
 		invMangView = new InventoryManagementView(mainInventory);
 		addProductView = new EditAddProductView(mainInventory);
 		salesDataView = new SalesDataView(mainInventory);

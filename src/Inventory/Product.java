@@ -25,7 +25,6 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 		details = d;
 	}
 
-
 	@Override
 	public String getName() {
 		return name;

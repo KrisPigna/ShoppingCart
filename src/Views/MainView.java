@@ -35,8 +35,7 @@ public class MainView extends JFrame {
 		loginView = new LoginView();
 		createView = new CreateAccountView();
 		custInventoryView = new CustomerInventoryView(mainInventory, cart);
-		JLabel cartTotal = custInventoryView.getCartTotal();
-		chkOutView = new CheckOutView(mainInventory, cart, cartTotal);
+		chkOutView = new CheckOutView(mainInventory, cart);
 		invMangView = new InventoryManagementView(mainInventory);
 		addProductView = new EditAddProductView(mainInventory);
 		salesDataView = new SalesDataView(mainInventory);
@@ -88,6 +87,7 @@ public class MainView extends JFrame {
 				JLabel label = new JLabel();
 				if (event.getSource().getClass() == btn.getClass()) {
 					custInventoryView.setVisible(false);
+					chkOutView.RefreshCheckOutView(mainInventory, cart);
 					chkOutView.setVisible(true);
 				}
 				if (event.getSource().getClass() == label.getClass()) {

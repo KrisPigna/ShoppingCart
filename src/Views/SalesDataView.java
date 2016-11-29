@@ -18,10 +18,11 @@ import javax.swing.event.ChangeListener;
 
 import Inventory.Inventory;
 import Models.BarChart;
+import Models.ShoppingCart;
 
 public class SalesDataView extends JPanel {
 
-	public SalesDataView(Inventory inv){
+	public SalesDataView(Inventory inv, ShoppingCart cart){
 		JLabel subtitle = new JLabel("Sales Data");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
@@ -29,7 +30,7 @@ public class SalesDataView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
-		JPanel chart = populateBarChart((int) inv.getWholesaleTotal(), 25, 100);
+		JPanel chart = populateBarChart(0,0,0);
 		JButton invMang = new JButton("Inventory Management");
 		invMang.addActionListener(new
 				ActionListener(){
@@ -50,7 +51,7 @@ public class SalesDataView extends JPanel {
 	 * Re-creates the view after a state-change to update its contents
 	 * @param inv Inventory object to populate view and add products to
 	 */
-	public void updateView(Inventory inv) {
+	public void updateView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
 		JLabel subtitle = new JLabel("Sales Data");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
@@ -59,7 +60,10 @@ public class SalesDataView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
-		JPanel chart = populateBarChart((int) inv.getWholesaleTotal(), 25, 100);
+		int cost = (int) inv.getWholesaleTotal();
+		int revenue = (int) cart.getAllRevenue();
+		int profit = revenue - cost;
+		JPanel chart = populateBarChart(cost, revenue, profit);
 		JButton invMang = new JButton("Inventory Management");
 		invMang.addActionListener(new
 				ActionListener(){

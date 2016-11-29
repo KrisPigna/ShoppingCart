@@ -80,28 +80,31 @@ public class Account implements java.io.Serializable {
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
-			ObjectInputStream obj_in = new ObjectInputStream(file_in);
-			Account temp = (Account) obj_in.readObject();
-			
-			try {
-				while (temp != null) {
-					checkDB.add(temp);
-					temp = (Account) obj_in.readObject();
+			File path = new File("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
+			if(path.exists()) {
+				FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
+				ObjectInputStream obj_in = new ObjectInputStream(file_in);
+				Account temp = (Account) obj_in.readObject();
+				
+				try {
+					while (temp != null) {
+						checkDB.add(temp);
+						temp = (Account) obj_in.readObject();
+					}
+				} catch (EOFException e) {
+					file_in.close();
+					obj_in.close();
 				}
-			} catch (EOFException e) {
-				file_in.close();
-				obj_in.close();
-			}
-			
-			for (Iterator<Account> it = checkDB.iterator(); it.hasNext();) {
-				Account account = it.next();
-				if(this.getUsername().equals(account.getUsername()) || this.getPassword().equals(account.getPassword())) {
-					return false;
+				
+				for (Iterator<Account> it = checkDB.iterator(); it.hasNext();) {
+					Account account = it.next();
+					if(this.getUsername().equals(account.getUsername()) || this.getPassword().equals(account.getPassword())) {
+						return false;
+					}
 				}
 			}
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Robert/git/ShoppingCart/Login_Credentials.ser");
+			//File path = new File("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			//********
 			// Uncomment this line to create a seller-type account, then
 			// re-comment it so all accounts created are customer-type
@@ -135,7 +138,7 @@ public class Account implements java.io.Serializable {
 	public int loginAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			Account temp = (Account) obj_in.readObject();
 			

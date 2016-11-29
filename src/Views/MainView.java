@@ -38,7 +38,7 @@ public class MainView extends JFrame {
 		chkOutView = new CheckOutView(mainInventory, cart);
 		invMangView = new InventoryManagementView(mainInventory);
 		addProductView = new EditAddProductView(mainInventory);
-		salesDataView = new SalesDataView(mainInventory);
+		salesDataView = new SalesDataView(mainInventory, cart);
 		
 		//add change listeners to each view
 		loginView.addChangeListener(new ChangeListener() {
@@ -109,7 +109,7 @@ public class MainView extends JFrame {
 						addProductView.setVisible(true);
 					}
 					if (btn.getText() == "Review Sales Data"){
-						salesDataView.updateView(mainInventory);
+						salesDataView.updateView(mainInventory, cart);
 						invMangView.setVisible(false);
 						salesDataView.setVisible(true);
 					}

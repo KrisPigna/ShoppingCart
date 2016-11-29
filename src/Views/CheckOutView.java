@@ -42,7 +42,7 @@ public class CheckOutView extends JPanel {
 		JScrollPane productScroll = new JScrollPane(cartList);
 		productScroll.setPreferredSize(new Dimension(300, 400));
 		JButton checkout = new JButton("Checkout");
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
@@ -64,7 +64,12 @@ public class CheckOutView extends JPanel {
 		JScrollPane productScroll = new JScrollPane(cartList);
 		productScroll.setPreferredSize(new Dimension(300, 400));
 		JButton submitOrder = new JButton("Submit Order");
-		
+		submitOrder.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						cart.checkout();
+					}
+		});
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);

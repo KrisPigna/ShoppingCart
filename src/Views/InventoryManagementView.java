@@ -13,6 +13,7 @@ import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
@@ -81,6 +82,20 @@ public class InventoryManagementView extends JPanel {
 						fireStateChanged(evt);
 					}
 				});
+				JButton remove = new JButton("Remove");
+				remove.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						int confirmButton = JOptionPane.YES_NO_OPTION;
+						int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to permanently remove this product from inventory?", "Confirm", confirmButton);
+						if(confirmResult == 0) {
+							inv.removeProduct(temp);
+							inv.saveToDB();
+							ChangeEvent evt = new ChangeEvent(remove);
+							fireStateChanged(evt);
+						}
+					}
+				});
 				JPanel itemDisplay = new JPanel();
 				itemDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				itemDisplay.setBackground(Color.WHITE);
@@ -88,6 +103,7 @@ public class InventoryManagementView extends JPanel {
 				itemDisplay.repaint();
 				itemDisplay.add(productName);
 				itemDisplay.add(edit);
+				itemDisplay.add(remove);
 				products.add(itemDisplay);
 			}
 		return products;

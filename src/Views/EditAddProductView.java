@@ -44,8 +44,16 @@ public class EditAddProductView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(createProd);
+						fireStateChanged(evt);
+					}
+		});
 		JPanel fields = new JPanel();
-		fields.setLayout(new SpringLayout());
+		fields.setLayout(new GridLayout(5,2));
 		fields.add(nameLabel);
 		fields.add(name);
 		fields.add(qtyLabel);
@@ -58,8 +66,9 @@ public class EditAddProductView extends JPanel {
 		fields.add(details);
 		JPanel buttons = new JPanel();
 		buttons.add(createProd);
+		buttons.add(cancel);
 		this.setLayout(new BorderLayout());
-		this.add(fields, BorderLayout.NORTH);
+		this.add(fields, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.setVisible(false);
 	}
@@ -90,6 +99,14 @@ public class EditAddProductView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(saveProd);
+						fireStateChanged(evt);
+					}
+		});
 		JPanel fields = new JPanel();
 		fields.setLayout(new GridLayout(5,2));
 		fields.add(nameLabel);
@@ -104,8 +121,9 @@ public class EditAddProductView extends JPanel {
 		fields.add(details);
 		JPanel buttons = new JPanel();
 		buttons.add(saveProd);
+		buttons.add(cancel);
 		this.setLayout(new BorderLayout());
-		this.add(fields, BorderLayout.NORTH);
+		this.add(fields, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.setVisible(false);
 	}
@@ -142,6 +160,14 @@ public class EditAddProductView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(createProd);
+						fireStateChanged(evt);
+					}
+		});
 		JPanel fields = new JPanel();
 		fields.setLayout(new GridLayout(5,2));
 		fields.add(nameLabel);
@@ -156,8 +182,9 @@ public class EditAddProductView extends JPanel {
 		fields.add(details);
 		JPanel buttons = new JPanel();
 		buttons.add(createProd);
+		buttons.add(cancel);
 		this.setLayout(new BorderLayout());
-		this.add(fields, BorderLayout.NORTH);
+		this.add(fields, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
 		this.setVisible(false);
 	}

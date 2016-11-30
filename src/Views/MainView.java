@@ -113,9 +113,14 @@ public class MainView extends JFrame {
 						invMangView.setVisible(false);
 						salesDataView.setVisible(true);
 					}
+					if (btn.getText() == "Remove"){
+						invMangView.updateView(mainInventory);
+						invMangView.setVisible(true);
+					}
 				}
 				if (event.getSource().getClass() == prod.getClass()) {
 					prod = (Product) event.getSource();
+					addProductView.updateView(mainInventory);
 					addProductView.editProduct(mainInventory, prod);
 					invMangView.setVisible(false);
 					addProductView.setVisible(true);

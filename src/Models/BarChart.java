@@ -12,12 +12,12 @@ import javax.swing.JLabel;
 public class BarChart implements Icon {
 	public BarChart(int width, Color color){
 		barHeight = 33;
-		barWidth = width;
+		barWidth = width/10;
 		barColor = color;
 	}
 	
 	public void setBarWidth(String width, JLabel label){
-			barWidth = 2*Integer.parseInt(width);
+			barWidth = (Integer.parseInt(width))%10;
 			label.repaint();
 	}
 	

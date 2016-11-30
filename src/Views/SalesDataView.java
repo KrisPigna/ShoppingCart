@@ -88,9 +88,9 @@ public class SalesDataView extends JPanel {
 		JLabel label1 = new JLabel(bar1, JLabel.LEFT);
 		JLabel label2 = new JLabel(bar2, JLabel.LEFT);
 		JLabel label3 = new JLabel(bar3, JLabel.LEFT);
-		JLabel cost = new JLabel("Costs: ");
-		JLabel revenue = new JLabel("Revenues: ");
-		JLabel profit = new JLabel("Profit: ");
+		JLabel cost = new JLabel("Costs: $" + Integer.toString(c));
+		JLabel revenue = new JLabel("Revenues: $" + Integer.toString(r));
+		JLabel profit = new JLabel("Profit: $" + Integer.toString(p));
 		JPanel chart = new JPanel();
 		chart.setLayout(new BoxLayout(chart, BoxLayout.Y_AXIS));
 		chart.setPreferredSize(new Dimension(400,100));

@@ -22,8 +22,8 @@ public abstract class ConcreteList implements ProductList {
 		return temp;
 	}
 	
-	public Product findActualProduct(Product key) {
-		for(Product product : prodList) {
+	public GenericProduct findActualProduct(GenericProduct key) {
+		for(GenericProduct product : prodList) {
 			if(key.getName() == product.getName()) {
 				return product;
 			}

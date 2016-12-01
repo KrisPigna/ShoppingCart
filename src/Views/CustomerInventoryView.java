@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Inventory.Product;
 import Models.ShoppingCart;
@@ -64,11 +65,11 @@ public class CustomerInventoryView extends JPanel {
 	 * @return JPanel with all inventory items added to it
 	 */
 	public JPanel buildInventoryList(Inventory inv, ShoppingCart cart){
-		Iterator<Product> i = inv.getIterator();
+		Iterator<GenericProduct> i = inv.getIterator();
 		JPanel products = new JPanel();
 		products.setLayout(new GridLayout(0,1,0,5));
 		while(i.hasNext()) {
-			final Product temp = i.next();
+			final GenericProduct temp = i.next();
 			//if product quantity in inventory is 0, this is skipped and item not added to view
 			if (temp.getQty() > 0) {
 				//this array is for making the "quantity" drop-down menu for each product
@@ -97,16 +98,20 @@ public class CustomerInventoryView extends JPanel {
 								int chosenQty = amount.getSelectedIndex();
 
 								if(amount.getSelectedIndex() != 0) {
-									Product selected = inv.findProduct(temp);
-									//get the current quantity of the product in inventory
-									int productQty = selected.getQty();
-									//set selected product quantity to selected amount
-									selected.setQty(chosenQty);
-									//and add it to the shopping cart
-									cart.addProduct(selected);
-									temp.setQty(productQty - chosenQty); // changes amount of inventory in database, need to undo if removed from cart or transaction cancelled.
-									//save changes to inventory
-									inv.saveToDB();
+									try {
+										GenericProduct selected = inv.findProduct(temp);
+										//get the current quantity of the product in inventory
+										int productQty = selected.getQty();
+										//set selected product quantity to selected amount
+										selected.setQty(chosenQty);
+										//and add it to the shopping cart
+										cart.addProduct(selected);
+										temp.setQty(productQty - chosenQty); // changes amount of inventory in database, need to undo if removed from cart or transaction cancelled.
+										//save changes to inventory
+										inv.saveToDB();
+									} catch (CloneNotSupportedException e) {
+										e.printStackTrace();
+									}
 									//update total of contents in cart on the view
 									cartTotal.setText(Double.toString(cart.getSellTotal()));
 									CheckOutView.setCheckOutTotal(cartTotal.getText());

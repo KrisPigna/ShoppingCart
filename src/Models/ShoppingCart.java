@@ -18,7 +18,7 @@ import Inventory.Product;
 
 public class ShoppingCart extends ConcreteList implements Serializable {
 	public ShoppingCart(){
-		prodList = new ArrayList<Product>();
+		//prodList = new ArrayList<GenericProduct>();
 	}
 	
 	public void checkout(){

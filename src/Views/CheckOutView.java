@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Inventory.Product;
 import Models.ShoppingCart;
@@ -79,11 +80,11 @@ public class CheckOutView extends JPanel {
 	}
 	
 	public static JPanel buildCartList(Inventory inv, ShoppingCart cart) {
-		Iterator<Product> i = cart.getIterator();
+		Iterator<GenericProduct> i = cart.getIterator();
 		JPanel cartList = new JPanel();
 		cartList.setLayout(new GridLayout(0,1,0,5));
 		while(i.hasNext()) {
-				final Product temp = i.next();
+				final GenericProduct temp = i.next();
 				JLabel productName = new JLabel(temp.getName());
 				JLabel qty = new JLabel(" -  Qty: ");
 				JLabel qtyOf = new JLabel(Integer.toString(temp.getQty()));

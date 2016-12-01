@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Product implements GenericProduct, Serializable, Cloneable {
 	
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public GenericProduct clone() throws CloneNotSupportedException {
+		return (GenericProduct) super.clone();
 	}
 
 	public Product(){
@@ -14,7 +14,7 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 		qty = 0;
 		sellPrice = 0;
 		wholesalePrice = 0;
-		details = null;
+		description = null;
 	}
 	
 	public Product(String n, int q, double p1, double p2, String d){
@@ -22,7 +22,7 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 		qty = q;
 		sellPrice = p1;
 		wholesalePrice = p2;
-		details = d;
+		description = d;
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 		qty = q;
 		sellPrice = p1;
 		wholesalePrice = p2;
-		details = d;
+		description = d;
 	}
 
 	@Override
@@ -60,26 +60,34 @@ public class Product implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public String getDescription() {
-		return details;
+		return description;
+	}
+	
+	@Override
+	public void setName(String n) {
+		name = n;
 	}
 
 	@Override
-	public String displayDetails() {
-		// TODO Auto-generated method stub
-		return "";
+	public void setSellPrice(double p) {
+		sellPrice = p;
 	}
 
 	@Override
-	public void hideDetails() {
-		// TODO Auto-generated method stub
+	public void setWholesalePrice(double p) {
+		wholesalePrice = p;
+	}
 
+	@Override
+	public void setDescription(String d) {
+		description = d;
 	}
 	
 	private String name;
 	private int qty;
 	private double sellPrice;
 	private double wholesalePrice;
-	private String details;
+	private String description;
 	private static final long serialVersionUID = 1L;
 
 }

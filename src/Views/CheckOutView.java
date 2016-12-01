@@ -93,7 +93,9 @@ public class CheckOutView extends JPanel {
 				remove.addActionListener(new
 						ActionListener(){
 							public void actionPerformed(ActionEvent event){
-								// TO-DO add item removed from cart back into inventory
+								cart.removeProduct(temp);
+								inv.updateQty(inv.findActualProduct(temp), inv.findActualProduct(temp).getQty() + temp.getQty());
+								inv.saveToDB();
 							}
 				});
 				

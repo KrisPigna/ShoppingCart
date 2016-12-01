@@ -25,6 +25,15 @@ public abstract class ConcreteList implements ProductList {
 		
 		return temp;
 	}
+	
+	public Product findActualProduct(Product key) {
+		for(Product product : prodList) {
+			if(key.getName() == product.getName()) {
+				return product;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public void updateQty(Product key, int newQty) {

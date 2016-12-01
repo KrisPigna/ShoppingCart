@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Inventory.Product;
 
@@ -68,11 +69,11 @@ public class InventoryManagementView extends JPanel {
 	 * @return JPanel with all inventory items added to it
 	 */
 	public JPanel buildInventoryList(Inventory inv){
-		Iterator<Product> i = inv.getIterator();
+		Iterator<GenericProduct> i = inv.getIterator();
 		JPanel products = new JPanel();
 		products.setLayout(new GridLayout(0,1,0,5));
 		while(i.hasNext()) {
-				final Product temp = i.next();
+				final GenericProduct temp = i.next();
 				JLabel productName = new JLabel(temp.getName());
 				JButton edit = new JButton("Edit");
 				edit.addActionListener(new

@@ -32,7 +32,7 @@ public abstract class ConcreteList implements ProductList {
 				return product;
 			}
 		}
-		return null;
+		return null; //
 	}
 
 	@Override

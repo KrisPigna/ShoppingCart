@@ -95,7 +95,7 @@ public class CheckOutView extends JPanel {
 							public void actionPerformed(ActionEvent event){
 								cart.removeProduct(temp);
 								inv.updateQty(inv.findActualProduct(temp), inv.findActualProduct(temp).getQty() + temp.getQty());
-								inv.saveToDB();
+								inv.saveToDB(); //
 							}
 				});
 				

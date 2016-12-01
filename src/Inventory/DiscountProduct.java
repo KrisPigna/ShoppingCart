@@ -1,6 +1,8 @@
 package Inventory;
 
-public class DiscountProduct implements GenericProduct {
+import java.io.Serializable;
+
+public class DiscountProduct implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public GenericProduct clone() throws CloneNotSupportedException {

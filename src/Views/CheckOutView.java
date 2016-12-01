@@ -53,6 +53,7 @@ public class CheckOutView extends JPanel {
 	}
 	
 	public void RefreshCheckOutView(Inventory inv, ShoppingCart cart) {
+		this.removeAll();
 		JLabel total = new JLabel("Cart total: $");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
@@ -79,7 +80,7 @@ public class CheckOutView extends JPanel {
 		this.setVisible(false);	
 	}
 	
-	public static JPanel buildCartList(Inventory inv, ShoppingCart cart) {
+	public JPanel buildCartList(Inventory inv, ShoppingCart cart) {
 		Iterator<GenericProduct> i = cart.getIterator();
 		JPanel cartList = new JPanel();
 		cartList.setLayout(new GridLayout(0,1,0,5));
@@ -96,7 +97,10 @@ public class CheckOutView extends JPanel {
 							public void actionPerformed(ActionEvent event){
 								cart.removeProduct(temp);
 								inv.updateQty(inv.findActualProduct(temp), inv.findActualProduct(temp).getQty() + temp.getQty());
-								inv.saveToDB(); //
+								inv.saveToDB(); 
+								editCheckOutTotal(checkOutTotal.getText(), temp.getQty() * temp.getSellPrice());
+								ChangeEvent evt = new ChangeEvent(remove);
+								fireStateChanged(evt);
 							}
 				});
 				
@@ -131,6 +135,13 @@ public class CheckOutView extends JPanel {
 	
 	public static void setCheckOutTotal(String key) {
 		checkOutTotal.setText(key);
+	}
+	
+	public static void editCheckOutTotal(String current, Double subtract) {
+		Double total = Double.parseDouble(current);
+		Double newTotal = total - subtract;
+		String setTotal = Double.toString(newTotal);
+		setCheckOutTotal(setTotal);
 	}
 	
 	private static JLabel checkOutTotal;

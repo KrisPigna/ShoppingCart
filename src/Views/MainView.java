@@ -86,13 +86,29 @@ public class MainView extends JFrame {
 				JButton btn = new JButton();
 				JLabel label = new JLabel();
 				if (event.getSource().getClass() == btn.getClass()) {
-					custInventoryView.setVisible(false);
-					chkOutView.RefreshCheckOutView(mainInventory, cart);
-					chkOutView.setVisible(true);
+					btn = (JButton) event.getSource();
+					if(btn.getText() == "Checkout") {
+						custInventoryView.setVisible(false);
+						chkOutView.RefreshCheckOutView(mainInventory, cart);
+						chkOutView.setVisible(true);
+					}	
 				}
 				if (event.getSource().getClass() == label.getClass()) {
 					label = (JLabel) event.getSource();
 					label.setVisible(true);
+				}
+			}
+		});
+		
+		chkOutView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton btn = new JButton();
+				if (event.getSource().getClass() == btn.getClass()) {
+					btn = (JButton) event.getSource();
+					if (btn.getText() == "Remove"){
+						chkOutView.RefreshCheckOutView(mainInventory, cart);
+						chkOutView.setVisible(true);
+					}
 				}
 			}
 		});

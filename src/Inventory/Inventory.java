@@ -26,10 +26,10 @@ public class Inventory extends ConcreteList implements Serializable {
     	// to add them at first, but comment out again to avoid adding them
     	// over and over each time the program runs - Kris
     	//************
-    	prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
-    	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
-    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));
-    	prodList.add(new DiscountProduct(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"), 0.5));
+//    	prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
+//    	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
+//    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));
+//    	prodList.add(new DiscountProduct(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"), 0.5));
         saveToDB();
     }
     

@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Inventory.DiscountProduct;
 import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Inventory.Product;
@@ -97,6 +98,19 @@ public class InventoryManagementView extends JPanel {
 						}
 					}
 				});
+				JButton discount = new JButton("Apply Discount");
+				discount.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						Object[] options = {"5", "10", "15", "20"};
+						String s = (String)JOptionPane.showInputDialog(null, "Choose discount: ", null, JOptionPane.PLAIN_MESSAGE, null, options, "5%");
+						DiscountProduct disc = new DiscountProduct(temp, Double.parseDouble(s)/100);
+						inv.replaceProduct(temp, disc);
+						inv.saveToDB();
+						ChangeEvent evt = new ChangeEvent(remove);
+						fireStateChanged(evt);
+					};
+				});
 				JPanel itemDisplay = new JPanel();
 				itemDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				itemDisplay.setBackground(Color.WHITE);
@@ -104,6 +118,7 @@ public class InventoryManagementView extends JPanel {
 				itemDisplay.repaint();
 				itemDisplay.add(productName);
 				itemDisplay.add(edit);
+				itemDisplay.add(discount);
 				itemDisplay.add(remove);
 				products.add(itemDisplay);
 			}

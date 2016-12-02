@@ -30,6 +30,15 @@ public abstract class ConcreteList implements ProductList {
 		}
 		return null; 
 	}
+	
+	public void replaceProduct(GenericProduct key, GenericProduct replacement) {
+		for(GenericProduct product : prodList) {
+			if(key.getName() == product.getName()) {
+				prodList.set(prodList.indexOf(product), replacement);
+				return;
+			}
+		}
+	}
 
 	@Override
 	public void updateQty(GenericProduct key, int newQty) {

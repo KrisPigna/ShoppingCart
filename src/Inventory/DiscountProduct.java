@@ -36,7 +36,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 
 	@Override
 	public String getDescription() {
-		return product.getDescription();
+		return product.getDescription() + " - " + Double.toString(discount * 100) + "% discount";
 	}
 	
 	public void updateProduct(String n, int q, double p1, double p2, String d) {

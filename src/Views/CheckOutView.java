@@ -69,7 +69,8 @@ public class CheckOutView extends JPanel {
 		submitOrder.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						cart.checkout();
+						ChangeEvent evt = new ChangeEvent(submitOrder);
+						fireStateChanged(evt);
 					}
 		});
 		this.setLayout(new BorderLayout());
@@ -139,6 +140,7 @@ public class CheckOutView extends JPanel {
 	
 	public static void editCheckOutTotal(String current, Double subtract) {
 		Double total = Double.parseDouble(current);
+		System.out.println("Parsing double: " + total);
 		Double newTotal = total - subtract;
 		String setTotal = Double.toString(newTotal);
 		setCheckOutTotal(setTotal);

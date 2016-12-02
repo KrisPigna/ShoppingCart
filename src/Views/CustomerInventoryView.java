@@ -59,6 +59,38 @@ public class CustomerInventoryView extends JPanel {
 		this.setVisible(false);	
 	}
 	
+	public void refreshCustomerInventoryView(Inventory inv, ShoppingCart cart) {
+		this.removeAll();
+		JLabel total = new JLabel("Cart total: $");
+		cartTotal = new JLabel("0");
+		JLabel title = new JLabel("Shop-A-Tron 5000");
+		title.setFont(new Font("Serif",  Font.BOLD, 30));
+		JPanel header = new JPanel();
+		header.setLayout(new FlowLayout());
+		header.add(title);
+		header.add(total);
+		header.add(cartTotal);
+		JPanel products = buildInventoryList(inv, cart);
+		JScrollPane productScroll = new JScrollPane(products);
+		productScroll.setPreferredSize(new Dimension(300, 400));
+		JButton checkout = new JButton("Checkout");
+		
+		checkout.addActionListener(new
+				ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						ChangeEvent evt = new ChangeEvent(checkout);
+						fireStateChanged(evt);
+					}
+		});
+		
+		this.setLayout(new BorderLayout());
+		this.add(header, BorderLayout.NORTH);
+		this.add(productScroll, BorderLayout.CENTER);
+		this.add(checkout, BorderLayout.SOUTH);
+		this.setPreferredSize(new Dimension(400, 450));
+		this.setVisible(false);	
+	}
+	
 	/**
 	 * Populates a JPanel with all the items in the inventory
 	 * and returns that JPanel for adding into the CustomerInventoryView

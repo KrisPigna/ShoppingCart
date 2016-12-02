@@ -19,6 +19,7 @@ public class MainView extends JFrame {
 	private CreateAccountView createView;
 	private CustomerInventoryView custInventoryView;
 	private CheckOutView chkOutView;
+	private CompleteOrderView compOrderView;
 	private InventoryManagementView invMangView;
 	private EditAddProductView addProductView;
 	private SalesDataView salesDataView;
@@ -36,6 +37,7 @@ public class MainView extends JFrame {
 		createView = new CreateAccountView();
 		custInventoryView = new CustomerInventoryView(mainInventory, cart);
 		chkOutView = new CheckOutView(mainInventory, cart);
+		compOrderView = new CompleteOrderView();
 		invMangView = new InventoryManagementView(mainInventory);
 		addProductView = new EditAddProductView(mainInventory);
 		salesDataView = new SalesDataView(mainInventory, cart);
@@ -109,6 +111,24 @@ public class MainView extends JFrame {
 						chkOutView.RefreshCheckOutView(mainInventory, cart);
 						chkOutView.setVisible(true);
 					}
+					if (btn.getText() == "Submit Order"){
+						chkOutView.setVisible(false);
+						compOrderView.setVisible(true);
+					}
+				}
+			}
+		});
+		
+		compOrderView.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				JButton btn = new JButton();
+				if (event.getSource().getClass() == btn.getClass()) {
+					btn = (JButton) event.getSource();
+					if (btn.getText() == "Shop Some More!"){
+						compOrderView.setVisible(false);
+						custInventoryView.refreshCustomerInventoryView(mainInventory, cart);
+						custInventoryView.setVisible(true);
+					}
 				}
 			}
 		});
@@ -177,6 +197,7 @@ public class MainView extends JFrame {
 		this.add(createView);
 		this.add(custInventoryView);
 		this.add(chkOutView);
+		this.add(compOrderView);
 		this.add(invMangView);
 		this.add(addProductView);
 		this.add(salesDataView);

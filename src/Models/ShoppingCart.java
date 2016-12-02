@@ -18,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 
 import Database.AppendToDB;
 import Inventory.ConcreteList;
+import Inventory.GenericProduct;
 import Inventory.Product;
 
 public class ShoppingCart extends ConcreteList implements Serializable {
@@ -26,6 +27,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 	}
 	
 	public void checkout(){
+		prodList = new ArrayList<GenericProduct>();
 		saveToDB();
 	}
 	

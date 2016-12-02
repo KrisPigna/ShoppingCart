@@ -113,6 +113,7 @@ public class MainView extends JFrame {
 					}
 					if (btn.getText() == "Submit Order"){
 						chkOutView.setVisible(false);
+						cart.checkout();
 						compOrderView.setVisible(true);
 					}
 				}
@@ -127,6 +128,7 @@ public class MainView extends JFrame {
 					if (btn.getText() == "Shop Some More!"){
 						compOrderView.setVisible(false);
 						custInventoryView.refreshCustomerInventoryView(mainInventory, cart);
+						chkOutView.RefreshCheckOutView(mainInventory, cart);
 						custInventoryView.setVisible(true);
 					}
 				}

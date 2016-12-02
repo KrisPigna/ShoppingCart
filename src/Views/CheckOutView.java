@@ -69,6 +69,7 @@ public class CheckOutView extends JPanel {
 		submitOrder.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
+						editCheckOutTotal(checkOutTotal.getText(), Double.parseDouble( checkOutTotal.getText()));
 						ChangeEvent evt = new ChangeEvent(submitOrder);
 						fireStateChanged(evt);
 					}

@@ -44,6 +44,14 @@ public class InventoryManagementView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JButton addBundle = new JButton("Add New Bundle");
+		addBundle.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(addBundle);
+						fireStateChanged(evt);
+					}
+		});
 		JButton salesData = new JButton("Review Sales Data");
 		salesData.addActionListener(new
 				ActionListener(){
@@ -55,6 +63,7 @@ public class InventoryManagementView extends JPanel {
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		buttons.add(addProduct);
+		buttons.add(addBundle);
 		buttons.add(salesData);
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
@@ -149,6 +158,14 @@ public class InventoryManagementView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JButton addBundle = new JButton("Add New Bundle");
+		addBundle.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(addBundle);
+						fireStateChanged(evt);
+					}
+		});
 		JButton salesData = new JButton("Review Sales Data");
 		salesData.addActionListener(new
 				ActionListener(){
@@ -160,6 +177,7 @@ public class InventoryManagementView extends JPanel {
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		buttons.add(addProduct);
+		buttons.add(addBundle);
 		buttons.add(salesData);
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);

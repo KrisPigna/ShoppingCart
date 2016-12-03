@@ -146,6 +146,12 @@ public class MainView extends JFrame {
 						invMangView.setVisible(false);
 						addProductView.setVisible(true);
 					}
+					if (btn.getText() == "Add New Bundle"){
+						addProductView.updateView(mainInventory);
+						addProductView.addBundle(mainInventory);
+						invMangView.setVisible(false);
+						addProductView.setVisible(true);
+					}
 					if (btn.getText() == "Review Sales Data"){
 						salesDataView.updateView(mainInventory, cart);
 						invMangView.setVisible(false);
@@ -175,6 +181,11 @@ public class MainView extends JFrame {
 					invMangView.setVisible(true);
 				}
 				if (temp.getText() == "Save Product"){
+					invMangView.updateView(mainInventory);
+					addProductView.setVisible(false);
+					invMangView.setVisible(true);
+				}
+				if (temp.getText() == "Create Bundle"){
 					invMangView.updateView(mainInventory);
 					addProductView.setVisible(false);
 					invMangView.setVisible(true);

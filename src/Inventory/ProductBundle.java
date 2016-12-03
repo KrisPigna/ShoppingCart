@@ -7,6 +7,12 @@ public class ProductBundle implements GenericProduct, Serializable, Cloneable {
 
 	public ProductBundle(){
 		products = new ArrayList<GenericProduct>();
+		bundleDescription = "Includes: ";
+	}
+	
+	public void addProduct (GenericProduct p) {
+		products.add(p);
+		bundleDescription = bundleDescription + p.getName() + " ";
 	}
 	
 	@Override
@@ -50,8 +56,7 @@ public class ProductBundle implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public void setName(String n) {
-		// TODO Auto-generated method stub
-		
+		bundleName = n;
 	}
 
 	@Override
@@ -74,14 +79,17 @@ public class ProductBundle implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public void setQty(int key) {
-		// TODO Auto-generated method stub
+		bundleQty = key;
 		
 	}
 
 	@Override
 	public GenericProduct clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		return (GenericProduct) super.clone();
+	}
+	
+	public int getSize() {
+		return products.size();
 	}
 	
 	private ArrayList<GenericProduct> products;

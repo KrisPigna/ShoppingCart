@@ -36,7 +36,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 	public void saveToDB(){
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/All_Sales.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/All_Sales.ser");
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -62,7 +62,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 		double revenue = 0;
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/All_Sales.ser");
+			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/All_Sales.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			ArrayList<Product> allSales = (ArrayList<Product>) obj_in.readObject();
 			try {

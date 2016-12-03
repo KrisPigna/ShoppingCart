@@ -21,12 +21,17 @@ import javax.swing.event.ChangeListener;
 import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Models.ShoppingCart;
-
+/**
+ * View class handles UI for a Check Out window.
+ * <p>Acts as display for items in user cart, allowing them to submit order or remove items.</p>
+ * @author Paul
+ */
 public class CheckOutView extends JPanel {
-
-	// WANT TO ADD: a back button to return from checkOutView back to CustomerInventory view, in order to add additional items to cart.
-	// Will need to refresh CustomerInventoryView in case anything has been removed from cart. 
-	
+	/**
+	 * Constructor for the view
+	 * @param inv
+	 * @param cart
+	 */
 	public CheckOutView(Inventory inv, ShoppingCart cart) {
 		JLabel total = new JLabel("Cart total: $");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
@@ -49,7 +54,13 @@ public class CheckOutView extends JPanel {
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 	}
-	
+	/**
+	 * Method to reconstruct the view when dynamic data has changed.
+	 * <p>A JButton "submitOrder" includes functionality to reset the checkOutTotal JLabel to zero
+	 * and initiate a state changed event to switch views to CompleteOrderView.</p>
+	 * @param inv
+	 * @param cart
+	 */
 	public void RefreshCheckOutView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
 		JLabel total = new JLabel("Cart total: $");
@@ -79,7 +90,13 @@ public class CheckOutView extends JPanel {
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 	}
-	
+	/**
+	 * Iterates through the items in the cart and puts them on display in a JPanel.
+	 * <p>A JButton "remove" includes functionality to remove items from customer cart and put them back in inventory.</p>
+	 * @param inv
+	 * @param cart
+	 * @return cartList
+	 */
 	public JPanel buildCartList(Inventory inv, ShoppingCart cart) {
 		Iterator<GenericProduct> i = cart.getIterator();
 		JPanel cartList = new JPanel();
@@ -118,12 +135,18 @@ public class CheckOutView extends JPanel {
 		return cartList;
 	}
 
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {
@@ -132,11 +155,19 @@ public class CheckOutView extends JPanel {
 	        }
 	    }
 	}
-	
+	/**
+	 * Method to update the instance JLabel to display a new given String value.
+	 * @param key
+	 */
 	public static void setCheckOutTotal(String key) {
 		checkOutTotal.setText(key);
 	}
-	
+	/**
+	 * Method to update the instance JLabel to display a new String value.
+	 * <p>New value based on the difference of the current value and the parameter subtract.</p>
+	 * @param current
+	 * @param subtract
+	 */
 	public static void editCheckOutTotal(String current, Double subtract) {
 		Double total = Double.parseDouble(current);
 		Double newTotal = total - subtract;

@@ -17,7 +17,9 @@ import Database.*;
 import Inventory.*;
 import Models.*;
 /**
- * 
+ * Tester class for the Shopping Cart Java Swing Application that tests a select number of functionalities.
+ * <p>Will test to verify product properly removed from inventory after purchase.</p>
+ * <p>Ensures revenue of a sale gets recorded.</p>
  * @author Paul
  */
 public class Tester {
@@ -65,7 +67,6 @@ public class Tester {
 		while(i.hasNext()) {
 			temp = i.next();
 		}
-		int chosenQty = 1;
 		GenericProduct selected = testInventory.findProduct(temp);
 		testCart.addProduct(selected);
 		testCart.saveToDB();
@@ -81,14 +82,21 @@ public class Tester {
 	public void testEditInventoryQty() {
 		// T0-DO once edit is implemented for InventoryManagementView
 	}
-	
+	/**
+	 * Begin main method to run tests
+	 * @param args
+	 * @throws CloneNotSupportedException
+	 */
 	public static void main(String[] args) throws CloneNotSupportedException {
 		Tester testCase = new Tester();
 		testCase.testPurchaseProcess();
 		testCase.testStatsTracked();
 	}
 }
-
+/**
+ * TestCart to extend ShoppingCart, saves data to a different file
+ * @author Paul
+ */
 class TestCart extends ShoppingCart {	
 	public void checkout(){
 		prodList = new ArrayList<GenericProduct>();
@@ -150,7 +158,7 @@ class TestCart extends ShoppingCart {
 }
 
 /**
- * 
+ * TestInventory to extend Inventory, saves data to a different file 
  * @author Paul
  */
 class TestInventory extends Inventory {

@@ -20,19 +20,32 @@ import Database.AppendToDB;
 import Inventory.ConcreteList;
 import Inventory.GenericProduct;
 import Inventory.Product;
-
+/**
+ * Class to simulate the user's shopping cart.
+ * <p>This class mostly handles storing of cart data in database, while its
+ * inherited ConcreteList handles the functionality of the Shopping Cart itself</p>
+ * @author Paul
+ */
 public class ShoppingCart extends ConcreteList implements Serializable {
 	public ShoppingCart(){}
-	
+	/**
+	 * Dump the cart and save its state. 
+	 */
 	public void checkout(){
 		prodList = new ArrayList<GenericProduct>();
 		saveToDB();
 	}
-	
+	/**
+	 * Scope of project does not include a full on "complete order and pay" process, however
+	 * placeholder method is here for future implementation.
+	 * <p>Current "complete the order" functionality is handled by change listener in appropriate view.</p>
+	 */
 	public void completeOrder(){
 		
 	}
-	
+	/**
+	 * Save state of the cart for statistics purposes
+	 */
 	public void saveToDB(){
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
@@ -57,7 +70,10 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Get all revenue from transactions
+	 * @return revenue
+	 */
 	public double getAllRevenue(){
 		double revenue = 0;
 		try { 

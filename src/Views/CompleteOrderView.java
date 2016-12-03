@@ -12,11 +12,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import Inventory.Inventory;
-import Models.ShoppingCart;
-
-public class CompleteOrderView extends JPanel { // for commit
+/**
+ * View class handles UI for a window confirming user transaction is complete.
+ * <p>For the scope of the Shopping Cart Application Project, this view serves
+ * as a placeholder for what would be a payment screen. Instead of collection and 
+ * processing payment, the user is simply informed their order is complete, and given
+ * the opportunity to return to the main product browse screen to do more shopping.</p>
+ * @author Paul
+ */
+public class CompleteOrderView extends JPanel { 
+	/**
+	 * Constructor for the view.
+	 * <p>A JButton "returnToBrowse" includes functionality to initiate a state change
+	 * and switch views back to CustomerInventoryView.</p>
+	 */
 	public CompleteOrderView() {
 		JLabel title = new JLabel("Your Order has been Placed!");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
@@ -40,12 +49,18 @@ public class CompleteOrderView extends JPanel { // for commit
 		this.setVisible(false);	
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener
+	 */
 		public void addChangeListener(ChangeListener listener) {
 		    listenerList.add(ChangeListener.class, listener);
 		}
 		
-		//method to iterate through all existing change listeners and notify them of a state change
+		/**
+		 * Method to iterate through all existing change listeners and notify them of a state change
+		 * @param evt
+		 */
 		protected void fireStateChanged(ChangeEvent evt) {
 		    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 		    if (listeners != null && listeners.length > 0) {

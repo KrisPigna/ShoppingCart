@@ -22,9 +22,18 @@ import javax.swing.event.ChangeListener;
 import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Models.ShoppingCart;
-
+/**
+ * Class to handle UI for when customer first logs in and browses available inventory.
+ * @author Paul
+ */
 public class CustomerInventoryView extends JPanel {
-	
+	/**
+	 * Constructor for the view
+	 * <p>Includes a JButton "checkout" with included functionality to fire a state change
+	 * and transition views to CheckOutView.
+	 * @param inv
+	 * @param cart
+	 */
 	public CustomerInventoryView(Inventory inv, ShoppingCart cart){
 		JLabel total = new JLabel("Cart total: $");
 		cartTotal = new JLabel("0");
@@ -55,7 +64,11 @@ public class CustomerInventoryView extends JPanel {
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 	}
-	
+	/**
+	 * Method to reconstruct the view when dynamic data has changed.
+	 * @param inv
+	 * @param cart
+	 */
 	public void refreshCustomerInventoryView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
 		JLabel total = new JLabel("Cart total: $");
@@ -91,7 +104,10 @@ public class CustomerInventoryView extends JPanel {
 	/**
 	 * Populates a JPanel with all the items in the inventory
 	 * and returns that JPanel for adding into the CustomerInventoryView
-	 * @return JPanel with all inventory items added to it
+	 * <p>Includes a JButton "addToCart" with included functionality to add user
+	 * selected product to their cart. Quantity added to cart and deducted from inventory
+	 * with this action.</p>
+	 * @return products - JPanel with all inventory items added to it
 	 */
 	public JPanel buildInventoryList(Inventory inv, ShoppingCart cart){
 		Iterator<GenericProduct> i = inv.getIterator();
@@ -163,12 +179,18 @@ public class CustomerInventoryView extends JPanel {
 		return products;
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

@@ -1,9 +1,7 @@
 package Models;
 
-import Views.*;
 import Database.AppendToDB;
 
-import java.awt.Rectangle;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,39 +10,56 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * Serialized class Account handles user accounts and their persistent storage.
+ * @author Paul
+ */
 public class Account implements java.io.Serializable {
-	
+	/**
+	 * Default constructor to set up variables
+	 */
 	public Account(){
 		username = null;
 		password = null;
 		seller = false;
 	}
-	
+	/**
+	 * Explicit value constructor to set up variables
+	 * @param user
+	 * @param pw
+	 */
 	public Account(String user, String pw){
 		username = user;
 		password = pw;
 		seller = false;
 	}
-	
+	/**
+	 * Accessor
+	 * @return username
+	 */
 	public String getUsername() {
 		return this.username;
 	}
-	
+	/**
+	 * Accessor
+	 * @return password
+	 */
 	public String getPassword() {
 		return this.password;
 	}
-	
+	/**
+	 * Accessor
+	 * @return seller
+	 */
 	public boolean getType() {
 		return seller;
 	}
-	
+	/**
+	 * Override of hashCode. 
+	 * <p>Assists with verifying Account objects after they're deserialized.</p>
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,7 +68,10 @@ public class Account implements java.io.Serializable {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
-
+	/**
+	 * Override of equals.
+	 * <p>Assists with verifying Account objects after they're deserialized.</p>
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,7 +93,10 @@ public class Account implements java.io.Serializable {
 			return false;
 		return true;
 	}
-
+	/**
+	 * User Account object created and stored.
+	 * @return
+	 */
 	public boolean createAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { 
@@ -134,7 +155,10 @@ public class Account implements java.io.Serializable {
 		}
 		return true;
 	}
-	
+	/**
+	 * Deserializes Account data and checks against what user has tried to login with.
+	 * @return int values
+	 */
 	public int loginAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser

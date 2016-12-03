@@ -17,13 +17,14 @@ import Database.*;
 import Inventory.*;
 import Models.*;
 /**
- * 
+ * Tester class for the Shopping Cart Java Swing Application that tests a select number of functionalities.
+ * <p>Will test to verify product properly removed from inventory after purchase.</p>
+ * <p>Ensures revenue of a sale gets recorded.</p>
  * @author Paul
  */
 public class Tester {
 	/**
-	 * Tests a regular customer purchase process. 
-	 * <p>Will test to verify product properly removed from inventory after purchase.</p>
+	 * Will test to verify product properly removed from inventory after purchase.
 	 * @throws CloneNotSupportedException 
 	 */
 	@Test
@@ -65,30 +66,49 @@ public class Tester {
 		while(i.hasNext()) {
 			temp = i.next();
 		}
-		int chosenQty = 1;
 		GenericProduct selected = testInventory.findProduct(temp);
 		testCart.addProduct(selected);
 		testCart.saveToDB();
 		testCart.checkout();
 		assertTrue(testCart.getAllRevenue() == 7.99); // 7.99 is sale of one coffee cup, which we sold out in the previous test.
-		File clearForNextRun = new File("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
+		File clearForNextRun = new File("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
 		clearForNextRun.delete();
 	}
 	/**
-	 * Tests that a seller can edit the quantity of an existing inventory item
+	 * Tests that a seller can edit the quantity of an existing inventory item and that update stored to database.
 	 */
 	@Test
-	public void testEditInventoryQty() {
-		// T0-DO once edit is implemented for InventoryManagementView
+	public void testSellerUpdateQuantity() {
+		TestInventory testInventory = new TestInventory();
+		testInventory.createTestInventory();
+		
+		Iterator<GenericProduct> i = testInventory.getIterator();
+		GenericProduct temp = null;
+		while(i.hasNext()) {
+			temp = i.next();
+		}
+		temp.updateProduct("Coffee Mug", 2/*quantity field*/, 7.99, 4.00, "Holds precious, precious coffee"); // quantity updated from 1 to 2
+		testInventory.saveToDB();
+		assertTrue(temp.getQty() == 2);
+		temp.updateProduct("Coffee Mug", 1/*quantity field*/, 7.99, 4.00, "Holds precious, precious coffee"); // change quantity back to 1
+		assertTrue(temp.getQty() == 1);
 	}
-	
+	/**
+	 * Begin main method to run tests
+	 * @param args
+	 * @throws CloneNotSupportedException
+	 */
 	public static void main(String[] args) throws CloneNotSupportedException {
 		Tester testCase = new Tester();
 		testCase.testPurchaseProcess();
 		testCase.testStatsTracked();
+		testCase.testSellerUpdateQuantity();
 	}
 }
-
+/**
+ * TestCart to extend ShoppingCart, saves data to a different file
+ * @author Paul
+ */
 class TestCart extends ShoppingCart {	
 	public void checkout(){
 		prodList = new ArrayList<GenericProduct>();
@@ -98,7 +118,7 @@ class TestCart extends ShoppingCart {
 	public void saveToDB(){
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -124,7 +144,7 @@ class TestCart extends ShoppingCart {
 		double revenue = 0;
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
+			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			ArrayList<Product> allSales = (ArrayList<Product>) obj_in.readObject();
 			try {
@@ -150,7 +170,7 @@ class TestCart extends ShoppingCart {
 }
 
 /**
- * 
+ * TestInventory to extend Inventory, saves data to a different file 
  * @author Paul
  */
 class TestInventory extends Inventory {
@@ -171,7 +191,7 @@ class TestInventory extends Inventory {
      */
     public void loadDB(){
     	try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/TestInventory.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/TestInventory.ser");
 			
 			if(path.exists()) {
 				FileInputStream fileIn = new FileInputStream(path);
@@ -193,7 +213,7 @@ class TestInventory extends Inventory {
      */
     public void saveToDB(){
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/TestInventory.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/TestInventory.ser");
 				FileOutputStream fileOut = new FileOutputStream(path, false);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 				objOut.writeObject(prodList);

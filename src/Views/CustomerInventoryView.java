@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
@@ -17,13 +16,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Inventory.GenericProduct;
 import Inventory.Inventory;
-import Inventory.Product;
 import Models.ShoppingCart;
 
 public class CustomerInventoryView extends JPanel {

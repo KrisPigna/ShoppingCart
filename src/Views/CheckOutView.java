@@ -12,7 +12,6 @@ import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,7 +20,6 @@ import javax.swing.event.ChangeListener;
 
 import Inventory.GenericProduct;
 import Inventory.Inventory;
-import Inventory.Product;
 import Models.ShoppingCart;
 
 public class CheckOutView extends JPanel {
@@ -141,7 +139,6 @@ public class CheckOutView extends JPanel {
 	
 	public static void editCheckOutTotal(String current, Double subtract) {
 		Double total = Double.parseDouble(current);
-		System.out.println("Parsing double: " + total);
 		Double newTotal = total - subtract;
 		String setTotal = Double.toString(newTotal);
 		setCheckOutTotal(setTotal);

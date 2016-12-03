@@ -1,6 +1,7 @@
 package Inventory;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 public class DiscountProduct implements GenericProduct, Serializable, Cloneable {
 

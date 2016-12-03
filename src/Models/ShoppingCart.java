@@ -22,16 +22,14 @@ import Inventory.GenericProduct;
 import Inventory.Product;
 
 public class ShoppingCart extends ConcreteList implements Serializable {
-	public ShoppingCart(){
-		//prodList = new ArrayList<GenericProduct>();
-	}
+	public ShoppingCart(){}
 	
 	public void checkout(){
 		prodList = new ArrayList<GenericProduct>();
 		saveToDB();
 	}
 	
-	public void completeOrder(JButton event){
+	public void completeOrder(){
 		
 	}
 	
@@ -69,7 +67,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 			ArrayList<Product> allSales = (ArrayList<Product>) obj_in.readObject();
 			try {
 				while (allSales != null) {
-					for (Product i : allSales)	{
+					for (GenericProduct i : allSales)	{
 						revenue = revenue + i.getSellPrice();
 					}
 					allSales = (ArrayList<Product>) obj_in.readObject();

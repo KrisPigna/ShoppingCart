@@ -50,8 +50,9 @@ public class ProductBundle implements GenericProduct, Serializable, Cloneable {
 
 	@Override
 	public void updateProduct(String n, int q, double p1, double p2, String d) {
-		// TODO Auto-generated method stub
-		
+		bundleName = n;
+		bundleQty = q;
+		bundleDescription = d;
 	}
 
 	@Override

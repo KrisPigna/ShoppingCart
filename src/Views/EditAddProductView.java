@@ -40,7 +40,7 @@ public void addBundle(Inventory inv) {
 	this.setVisible(false);
 }
 	
-	public void editProduct(Inventory inv, Product prod) {
+	public void editProduct(Inventory inv, GenericProduct prod) {
 		final JTextField name = new JTextField(prod.getName());
 		final JTextField quantity = new JTextField(Integer.toString(prod.getQty()));
 		final JTextField sellPrice = new JTextField(Double.toString(prod.getSellPrice()));
@@ -181,10 +181,10 @@ public void addBundle(Inventory inv) {
 					ActionListener(){
 						public void actionPerformed(ActionEvent event){
 							try {
-								bundle.setName(name.getText());
-								bundle.setQty(Integer.parseInt(quantity.getText()));
 								GenericProduct selected = inv.findProduct(temp);
 								bundle.addProduct(selected);
+								addProd.setEnabled(false);
+								addProd.setText("Added!");
 							} catch (CloneNotSupportedException e) {
 								e.printStackTrace();
 							}
@@ -205,6 +205,8 @@ public void addBundle(Inventory inv) {
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
 						if (bundle.getSize() > 1) {
+							bundle.setName(name.getText());
+							bundle.setQty(Integer.parseInt(quantity.getText()));
 							inv.addProduct(bundle);
 							inv.saveToDB();
 							ChangeEvent evt = new ChangeEvent(createBundle);

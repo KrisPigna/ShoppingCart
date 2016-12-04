@@ -29,13 +29,22 @@ public class InventoryManagementView extends JPanel {
 		JLabel subtitle = new JLabel("Inventory Management");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
+		JButton logout = new JButton("Logout");
+		logout.addActionListener(new
+				ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				ChangeEvent evt = new ChangeEvent(logout);
+				fireStateChanged(evt);
+			}
+		});
 		JPanel header = new JPanel();
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
+		header.add(logout);
 		JPanel products = buildInventoryList(inv);
 		JScrollPane productScroll = new JScrollPane(products);
-		productScroll.setPreferredSize(new Dimension(300, 400));
+		productScroll.setPreferredSize(new Dimension(600, 400));
 		JButton addProduct = new JButton("Add New Product");
 		addProduct.addActionListener(new
 				ActionListener(){
@@ -61,7 +70,7 @@ public class InventoryManagementView extends JPanel {
 					}
 		});
 		JPanel buttons = new JPanel();
-		buttons.setLayout(new FlowLayout());
+		buttons.setLayout(new GridLayout(1,3,5,20));
 		buttons.add(addProduct);
 		buttons.add(addBundle);
 		buttons.add(salesData);
@@ -69,7 +78,7 @@ public class InventoryManagementView extends JPanel {
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
-		this.setPreferredSize(new Dimension(400, 450));
+		this.setPreferredSize(new Dimension(600, 450));
 		this.setVisible(false);	
 	}
 	
@@ -143,13 +152,22 @@ public class InventoryManagementView extends JPanel {
 		JLabel subtitle = new JLabel("Inventory Management");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
+		JButton logout = new JButton("Logout");
+		logout.addActionListener(new
+				ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				ChangeEvent evt = new ChangeEvent(logout);
+				fireStateChanged(evt);
+			}
+		});
 		JPanel header = new JPanel();
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
+		header.add(logout);
 		JPanel products = buildInventoryList(inv);
 		JScrollPane productScroll = new JScrollPane(products);
-		productScroll.setPreferredSize(new Dimension(300, 400));
+		productScroll.setPreferredSize(new Dimension(600, 400));
 		JButton addProduct = new JButton("Add New Product");
 		addProduct.addActionListener(new
 				ActionListener(){
@@ -175,7 +193,7 @@ public class InventoryManagementView extends JPanel {
 					}
 		});
 		JPanel buttons = new JPanel();
-		buttons.setLayout(new FlowLayout());
+		buttons.setLayout(new GridLayout(1,3,5,20));
 		buttons.add(addProduct);
 		buttons.add(addBundle);
 		buttons.add(salesData);
@@ -183,7 +201,7 @@ public class InventoryManagementView extends JPanel {
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
-		this.setPreferredSize(new Dimension(400, 450));
+		this.setPreferredSize(new Dimension(600, 450));
 		this.setVisible(false);	
 	}
 	

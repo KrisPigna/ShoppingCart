@@ -120,6 +120,10 @@ public class MainView extends JFrame {
 						chkOutView.RefreshCheckOutView(mainInventory, cart);
 						chkOutView.setVisible(true);
 					}
+					if (btn.getText() == "Back"){
+						chkOutView.setVisible(false);
+						custInventoryView.setVisible(true);
+					}
 					if (btn.getText() == "Submit Order"){
 						chkOutView.setVisible(false);
 						cart.checkout();

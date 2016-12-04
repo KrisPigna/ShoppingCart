@@ -74,6 +74,7 @@ public class CheckOutView extends JPanel {
 		JPanel cartList = buildCartList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(cartList);
 		productScroll.setPreferredSize(new Dimension(300, 400));
+		JButton goBack = new JButton("Back");
 		JButton submitOrder = new JButton("Submit Order");
 		submitOrder.addActionListener(new
 				ActionListener(){
@@ -83,9 +84,17 @@ public class CheckOutView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		goBack.addActionListener(new
+				ActionListener(){
+					public void actionPerformed(ActionEvent event){
+						ChangeEvent evt = new ChangeEvent(goBack);
+						fireStateChanged(evt);
+					}
+		});
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
+		this.add(goBack, BorderLayout.EAST);
 		this.add(submitOrder, BorderLayout.SOUTH);
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	

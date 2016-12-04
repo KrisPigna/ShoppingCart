@@ -9,8 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Inventory.DiscountProduct;
+import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Inventory.Product;
+import Inventory.ProductBundle;
 import Models.ShoppingCart;
 
 public class MainView extends JFrame {
@@ -53,10 +56,12 @@ public class MainView extends JFrame {
 					createView.setVisible(true);
 				}
 				if (temp == 1) {
+					custInventoryView.refreshCustomerInventoryView(mainInventory, cart);
 					loginView.setVisible(false);
 					custInventoryView.setVisible(true);
 				}
 				if (temp == 2) {
+					invMangView.updateView(mainInventory);
 					loginView.setVisible(false);
 					invMangView.setVisible(true);
 				}
@@ -93,7 +98,11 @@ public class MainView extends JFrame {
 						custInventoryView.setVisible(false);
 						chkOutView.RefreshCheckOutView(mainInventory, cart);
 						chkOutView.setVisible(true);
-					}	
+					}
+					if (btn.getText() == "Logout"){
+						custInventoryView.setVisible(false);
+						loginView.setVisible(true);
+					}
 				}
 				if (event.getSource().getClass() == label.getClass()) {
 					label = (JLabel) event.getSource();
@@ -139,10 +148,18 @@ public class MainView extends JFrame {
 			public void stateChanged(ChangeEvent event) {
 				JButton btn = new JButton();
 				Product prod = new Product();
+				DiscountProduct discProd = new DiscountProduct(prod, 0);
+				ProductBundle bundle = new ProductBundle();
 				if (event.getSource().getClass() == btn.getClass()) {
 					btn = (JButton) event.getSource();
 					if (btn.getText() == "Add New Product"){
 						addProductView.updateView(mainInventory);
+						invMangView.setVisible(false);
+						addProductView.setVisible(true);
+					}
+					if (btn.getText() == "Add New Bundle"){
+						addProductView.updateView(mainInventory);
+						addProductView.addBundle(mainInventory);
 						invMangView.setVisible(false);
 						addProductView.setVisible(true);
 					}
@@ -155,11 +172,15 @@ public class MainView extends JFrame {
 						invMangView.updateView(mainInventory);
 						invMangView.setVisible(true);
 					}
+					if (btn.getText() == "Logout"){
+						invMangView.setVisible(false);
+						loginView.setVisible(true);
+					}
 				}
-				if (event.getSource().getClass() == prod.getClass()) {
-					prod = (Product) event.getSource();
+				if (event.getSource().getClass() == prod.getClass() || event.getSource().getClass() == discProd.getClass() || event.getSource().getClass() == bundle.getClass()) {
+					GenericProduct temp = (GenericProduct) event.getSource();
 					addProductView.updateView(mainInventory);
-					addProductView.editProduct(mainInventory, prod);
+					addProductView.editProduct(mainInventory, temp);
 					invMangView.setVisible(false);
 					addProductView.setVisible(true);
 				}
@@ -175,6 +196,11 @@ public class MainView extends JFrame {
 					invMangView.setVisible(true);
 				}
 				if (temp.getText() == "Save Product"){
+					invMangView.updateView(mainInventory);
+					addProductView.setVisible(false);
+					invMangView.setVisible(true);
+				}
+				if (temp.getText() == "Create Bundle"){
 					invMangView.updateView(mainInventory);
 					addProductView.setVisible(false);
 					invMangView.setVisible(true);

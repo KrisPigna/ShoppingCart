@@ -13,6 +13,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	public DiscountProduct(GenericProduct prod, double disc){
 		product = prod;
 		discount = disc;
+		quantity = prod.getQty();
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	@Override
 	public int getQty() {
-		return product.getQty();
+		return quantity;
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	@Override
 	public void setQty(int key) {
-		product.setQty(key);
+		quantity = key;
 	}
 	
 	public void setDiscount(double key) {
@@ -79,6 +80,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	private GenericProduct product;
 	private double discount;
+	private int quantity;
 	private static final long serialVersionUID = 1L;
 
 }

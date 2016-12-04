@@ -35,18 +35,29 @@ public class CustomerInventoryView extends JPanel {
 	 * @param cart
 	 */
 	public CustomerInventoryView(Inventory inv, ShoppingCart cart){
-		JLabel total = new JLabel("Cart total: $");
+		JLabel totalLabel = new JLabel("Cart total: $");
 		cartTotal = new JLabel("0");
+		JPanel total = new JPanel();
+		total.add(totalLabel);
+		total.add(cartTotal);
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
+		JButton logout = new JButton("Logout");
+		logout.addActionListener(new
+				ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				ChangeEvent evt = new ChangeEvent(logout);
+				fireStateChanged(evt);
+			}
+		});
 		JPanel header = new JPanel();
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(total);
-		header.add(cartTotal);
+		header.add(logout);
 		JPanel products = buildInventoryList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(products);
-		productScroll.setPreferredSize(new Dimension(300, 400));
+		productScroll.setPreferredSize(new Dimension(350, 400));
 		JButton checkout = new JButton("Checkout");
 		
 		checkout.addActionListener(new
@@ -61,7 +72,7 @@ public class CustomerInventoryView extends JPanel {
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
 		this.add(checkout, BorderLayout.SOUTH);
-		this.setPreferredSize(new Dimension(400, 450));
+		this.setPreferredSize(new Dimension(450, 450));
 		this.setVisible(false);	
 	}
 	/**
@@ -71,18 +82,20 @@ public class CustomerInventoryView extends JPanel {
 	 */
 	public void refreshCustomerInventoryView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
-		JLabel total = new JLabel("Cart total: $");
+		JLabel totalLabel = new JLabel("Cart total: $");
 		cartTotal = new JLabel("0");
+		JPanel total = new JPanel();
+		total.add(totalLabel);
+		total.add(cartTotal);
 		JLabel title = new JLabel("Shop-A-Tron 5000");
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
 		JPanel header = new JPanel();
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(total);
-		header.add(cartTotal);
 		JPanel products = buildInventoryList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(products);
-		productScroll.setPreferredSize(new Dimension(300, 400));
+		productScroll.setPreferredSize(new Dimension(350, 400));
 		JButton checkout = new JButton("Checkout");
 		
 		checkout.addActionListener(new
@@ -97,7 +110,7 @@ public class CustomerInventoryView extends JPanel {
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
 		this.add(checkout, BorderLayout.SOUTH);
-		this.setPreferredSize(new Dimension(400, 450));
+		this.setPreferredSize(new Dimension(450, 450));
 		this.setVisible(false);	
 	}
 	

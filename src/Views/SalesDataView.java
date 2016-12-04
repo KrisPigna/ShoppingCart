@@ -60,10 +60,10 @@ public class SalesDataView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		header.add(subtitle);
-		int cost = (int) inv.getWholesaleTotal();
-		int revenue = (int) cart.getAllRevenue();
-		int profit = revenue - cost;
-		JPanel chart = populateBarChart(cost, revenue, profit);
+		double cost = inv.getCosts();
+		double revenue = cart.getAllRevenue();
+		double profit = revenue - cost;
+		JPanel chart = populateBarChart((int) cost, (int) revenue, (int) profit);
 		JButton invMang = new JButton("Inventory Management");
 		invMang.addActionListener(new
 				ActionListener(){

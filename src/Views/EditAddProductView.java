@@ -46,6 +46,7 @@ public void addBundle(Inventory inv) {
 		final JTextField sellPrice = new JTextField(Double.toString(prod.getSellPrice()));
 		final JTextField wholePrice = new JTextField(Double.toString(prod.getWholesalePrice()));
 		final JTextField details = new JTextField(prod.getDescription());
+		double oldQty = prod.getQty();
 		JLabel nameLabel = new JLabel("Name: ");
 		JLabel qtyLabel = new JLabel("Quantity: ");
 		JLabel sellLabel = new JLabel("Selling Price: ");
@@ -62,6 +63,8 @@ public void addBundle(Inventory inv) {
 								Double.parseDouble(wholePrice.getText()),
 								details.getText());
 						inv.saveToDB();
+						double newCost = prod.getWholesalePrice() * ((prod.getQty()) - oldQty);
+						inv.saveCostsToDB(newCost);
 						ChangeEvent evt = new ChangeEvent(saveProd);
 						fireStateChanged(evt);
 					}
@@ -130,6 +133,8 @@ public void addBundle(Inventory inv) {
 								details.getText());
 						inv.addProduct(newProd);
 						inv.saveToDB();
+						double newCost = newProd.getWholesalePrice() * newProd.getQty();
+						inv.saveCostsToDB(newCost);
 						ChangeEvent evt = new ChangeEvent(createProd);
 						fireStateChanged(evt);
 					}
@@ -209,6 +214,8 @@ public void addBundle(Inventory inv) {
 							bundle.setQty(Integer.parseInt(quantity.getText()));
 							inv.addProduct(bundle);
 							inv.saveToDB();
+							double newCost = bundle.getWholesalePrice() * bundle.getQty();
+							inv.saveCostsToDB(newCost);
 							ChangeEvent evt = new ChangeEvent(createBundle);
 							fireStateChanged(evt);
 						}

@@ -84,7 +84,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 			try {
 				while (allSales != null) {
 					for (GenericProduct i : allSales)	{
-						revenue = revenue + i.getSellPrice();
+						revenue = revenue + i.getSellPrice() * i.getQty();
 					}
 					allSales = (ArrayList<Product>) obj_in.readObject();
 				}

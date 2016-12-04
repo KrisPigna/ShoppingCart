@@ -93,11 +93,23 @@ public class CustomerInventoryView extends JPanel {
 		title.setFont(new Font("Serif",  Font.BOLD, 30));
 		JPanel header = new JPanel();
 		header.setLayout(new FlowLayout());
+		
+		JButton logout = new JButton("Logout");
+		logout.addActionListener(new
+				ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				ChangeEvent evt = new ChangeEvent(logout);
+				fireStateChanged(evt);
+			}
+		});
+		
 		header.add(title);
 		header.add(total);
+		header.add(logout);
 		JPanel products = buildInventoryList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(products);
 		productScroll.setPreferredSize(new Dimension(350, 400));
+		
 		JButton checkout = new JButton("Checkout");
 		
 		checkout.addActionListener(new

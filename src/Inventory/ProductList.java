@@ -18,4 +18,6 @@ public interface ProductList {
 	public double getSellTotal();
 	
 	public double getWholesaleTotal();
+	
+	public boolean isEmpty();
 }

@@ -83,5 +83,12 @@ public abstract class ConcreteList implements ProductList {
 		return total;
 	}
 	
+	@Override
+	public boolean isEmpty() {
+		if(prodList.isEmpty()) return true;
+		else
+			return false;
+	}
+	
 	protected ArrayList<GenericProduct> prodList = new ArrayList<GenericProduct>();
 }

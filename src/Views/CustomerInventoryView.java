@@ -63,8 +63,10 @@ public class CustomerInventoryView extends JPanel {
 		checkout.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-						ChangeEvent evt = new ChangeEvent(checkout);
-						fireStateChanged(evt);
+						if(!cart.isEmpty()) {
+							ChangeEvent evt = new ChangeEvent(checkout);
+							fireStateChanged(evt);
+						}
 					}
 		});
 		
@@ -101,8 +103,10 @@ public class CustomerInventoryView extends JPanel {
 		checkout.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-						ChangeEvent evt = new ChangeEvent(checkout);
-						fireStateChanged(evt);
+						if(!cart.isEmpty()) {
+							ChangeEvent evt = new ChangeEvent(checkout);
+							fireStateChanged(evt);
+						}	
 					}
 		});
 		

@@ -93,11 +93,15 @@ public class CheckOutView extends JPanel {
 						fireStateChanged(evt);
 					}
 		});
+		JPanel buttons = new JPanel();
+		buttons.setLayout(new GridLayout(1,3,5,20));
+		buttons.add(submitOrder);
+		buttons.add(goBack);
+		
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
-		this.add(goBack, BorderLayout.EAST);
-		this.add(submitOrder, BorderLayout.SOUTH);
+		this.add(buttons, BorderLayout.SOUTH);
 		this.setPreferredSize(new Dimension(400, 450));
 		this.setVisible(false);	
 	}

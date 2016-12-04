@@ -101,9 +101,9 @@ public class Account implements java.io.Serializable {
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			File path = new File("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			if(path.exists()) {
-				FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+				FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 				ObjectInputStream obj_in = new ObjectInputStream(file_in);
 				Account temp = (Account) obj_in.readObject();
 				
@@ -162,7 +162,7 @@ public class Account implements java.io.Serializable {
 	public int loginAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			Account temp = (Account) obj_in.readObject();
 			

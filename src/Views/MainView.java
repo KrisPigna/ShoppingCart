@@ -126,7 +126,7 @@ public class MainView extends JFrame {
 					}
 					if (btn.getText() == "Submit Order"){
 						chkOutView.setVisible(false);
-						cart.checkout();
+						
 						compOrderView.setVisible(true);
 					}
 				}

@@ -72,7 +72,7 @@ public class Tester {
 		testCart.saveToDB();
 		testCart.checkout();
 		assertTrue(testCart.getAllRevenue() == 7.99); // 7.99 is sale of one coffee cup, which we sold out in the previous test.
-		File clearForNextRun = new File("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
+		File clearForNextRun = new File("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
 		clearForNextRun.delete();
 	}
 	/**

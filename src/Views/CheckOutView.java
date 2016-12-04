@@ -80,6 +80,7 @@ public class CheckOutView extends JPanel {
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
 						if(!cart.isEmpty()) {
+							cart.checkout();
 							editCheckOutTotal(checkOutTotal.getText(), Double.parseDouble( checkOutTotal.getText()));
 							ChangeEvent evt = new ChangeEvent(submitOrder);
 							fireStateChanged(evt);

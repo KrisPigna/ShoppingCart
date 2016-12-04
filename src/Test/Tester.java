@@ -20,6 +20,7 @@ import Models.*;
  * Tester class for the Shopping Cart Java Swing Application that tests a select number of functionalities.
  * <p>Will test to verify product properly removed from inventory after purchase.</p>
  * <p>Ensures revenue of a sale gets recorded.</p>
+ * <p>Ensures seller can update an existing inventory item's quantity</p>
  * @author Paul
  */
 public class Tester {
@@ -118,7 +119,7 @@ class TestCart extends ShoppingCart {
 	public void saveToDB(){
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
+			File path = new File("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -144,7 +145,7 @@ class TestCart extends ShoppingCart {
 		double revenue = 0;
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/Test_All_Sales.ser");
+			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Test_All_Sales.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			ArrayList<Product> allSales = (ArrayList<Product>) obj_in.readObject();
 			try {
@@ -191,7 +192,7 @@ class TestInventory extends Inventory {
      */
     public void loadDB(){
     	try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Mario/git/ShoppingCart/TestInventory.ser");
+			File path = new File("/Users/Paul/git/ShoppingCart/TestInventory.ser");
 			
 			if(path.exists()) {
 				FileInputStream fileIn = new FileInputStream(path);
@@ -213,7 +214,7 @@ class TestInventory extends Inventory {
      */
     public void saveToDB(){
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Mario/git/ShoppingCart/TestInventory.ser");
+			File path = new File("/Users/Paul/git/ShoppingCart/TestInventory.ser");
 				FileOutputStream fileOut = new FileOutputStream(path, false);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 				objOut.writeObject(prodList);

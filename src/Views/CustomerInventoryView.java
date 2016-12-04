@@ -180,7 +180,7 @@ public class CustomerInventoryView extends JPanel {
 										selected.setQty(chosenQty);
 										//and add it to the shopping cart
 										cart.addProduct(selected);
-										temp.setQty(productQty - chosenQty); // changes amount of inventory in database, need to undo if removed from cart or transaction cancelled.
+										temp.setQty(productQty - chosenQty);
 										//save changes to inventory
 										inv.saveToDB();
 									} catch (CloneNotSupportedException e) {

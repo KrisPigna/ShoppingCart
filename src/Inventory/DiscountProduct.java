@@ -13,7 +13,6 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	public DiscountProduct(GenericProduct prod, double disc){
 		product = prod;
 		discount = disc;
-		quantity = prod.getQty();
 	}
 
 	@Override
@@ -23,7 +22,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	@Override
 	public double getSellPrice() {
-		return product.getSellPrice() * discount;
+		return product.getSellPrice() - (product.getSellPrice() * discount);
 	}
 	
 	@Override
@@ -33,7 +32,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	@Override
 	public int getQty() {
-		return quantity;
+		return product.getQty();
 	}
 
 	@Override
@@ -42,11 +41,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	}
 	
 	public void updateProduct(String n, int q, double p1, double p2, String d) {
-		product.setName(n);
-		product.setQty(q);
-		product.setSellPrice(p1);
-		product.setWholesalePrice(p2);
-		product.setDescription(d);
+		product.updateProduct(n, q, p1, p2, d);
 	}
 	
 	@Override
@@ -71,7 +66,7 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	@Override
 	public void setQty(int key) {
-		quantity = key;
+		product.setQty(key);
 	}
 	
 	public void setDiscount(double key) {
@@ -80,7 +75,6 @@ public class DiscountProduct implements GenericProduct, Serializable, Cloneable 
 	
 	private GenericProduct product;
 	private double discount;
-	private int quantity;
 	private static final long serialVersionUID = 1L;
 
 }

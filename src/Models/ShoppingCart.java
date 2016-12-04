@@ -32,8 +32,8 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 	 * Dump the cart and save its state. 
 	 */
 	public void checkout(){
-		prodList = new ArrayList<GenericProduct>();
 		saveToDB();
+		prodList = new ArrayList<GenericProduct>();
 	}
 	/**
 	 * Scope of project does not include a full on "complete order and pay" process, however

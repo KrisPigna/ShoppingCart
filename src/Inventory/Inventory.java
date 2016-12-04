@@ -1,5 +1,6 @@
 package Inventory;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,7 @@ public class Inventory extends ConcreteList implements Serializable {
 	    
     public Inventory() {
     	loadDB(); 
+    	getAllCosts();
     	//************
         // Hard coded products to initially populate inventory; remove comments
     	// to add them at first, but comment out again to avoid adding them
@@ -71,6 +73,58 @@ public class Inventory extends ConcreteList implements Serializable {
 			
 		}
     }
-
+    
+    public void saveCostsToDB(double newCost){
+		try { 
+			costHistory = costHistory + newCost;
+			// Insert your own directory to avoid errors. Filename extension must be .ser
+			File path = new File("/Users/Mario/git/ShoppingCart/All_Costs.ser");
+			//if(!path.exists()) {
+				FileOutputStream fileOut = new FileOutputStream(path, false);
+				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+				objOut.writeObject(costHistory);
+				objOut.close();
+				fileOut.close();
+			//}
+/*			else {
+				FileOutputStream fileOut = new FileOutputStream(path, false);
+				AppendToDB objOut = new AppendToDB(fileOut);
+				objOut.writeObject(costHistory); 
+				objOut.close();
+				fileOut.close();
+			}*/
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Get all costs from inventory
+	 * @return costs
+	 */
+	public void getAllCosts(){
+		double costs = 0;
+		try { 
+			// Insert your own directory to avoid errors. Filename extension must be .ser
+			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/All_Costs.ser");
+			ObjectInputStream obj_in = new ObjectInputStream(file_in);
+			costHistory = (double) obj_in.readObject();
+				file_in.close();
+				obj_in.close();
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public double getCosts() {
+		return costHistory;
+	}
+	
+	private double costHistory;
     private static final long serialVersionUID = 1L;
 }

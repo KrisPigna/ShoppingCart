@@ -22,6 +22,7 @@ public class Inventory extends ConcreteList implements Serializable {
 	    
     public Inventory() {
     	loadDB(); 
+    	saveCostsToDB(0);
     	getAllCosts();
     	//************
         // Hard coded products to initially populate inventory; remove comments
@@ -31,7 +32,6 @@ public class Inventory extends ConcreteList implements Serializable {
 //    	prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
 //    	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
 //    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));
-//    	prodList.add(new DiscountProduct(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"), 0.5));
         saveToDB();
     }
     
@@ -40,7 +40,7 @@ public class Inventory extends ConcreteList implements Serializable {
      */
     public void loadDB(){
     	try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
+			File path = new File(System.getProperty("user.home") + "/Inventory.ser");
 			
 			if(path.exists()) {
 				FileInputStream fileIn = new FileInputStream(path);
@@ -62,7 +62,13 @@ public class Inventory extends ConcreteList implements Serializable {
      */
     public void saveToDB(){
         try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Inventory.ser");
+				File path = new File(System.getProperty("user.home") + "/Inventory.ser");
+				if (!path.exists()) {
+					prodList.add(new Product("Umbrella", 5, 15.99, 10.00, "Defeats the rain"));
+			    	prodList.add(new Product("Coffee Mug", 10, 7.99, 4.00, "Holds precious, precious coffee"));
+			    	prodList.add(new Product("Legal Pad", 20, 4.99, 2.00, "For writing on, legally"));
+			    	saveCostsToDB(130);
+				}
 				FileOutputStream fileOut = new FileOutputStream(path, false);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 				objOut.writeObject(prodList);
@@ -78,21 +84,12 @@ public class Inventory extends ConcreteList implements Serializable {
 		try { 
 			costHistory = costHistory + newCost;
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Mario/git/ShoppingCart/All_Costs.ser");
-			//if(!path.exists()) {
-				FileOutputStream fileOut = new FileOutputStream(path, false);
-				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-				objOut.writeObject(costHistory);
-				objOut.close();
-				fileOut.close();
-			//}
-/*			else {
-				FileOutputStream fileOut = new FileOutputStream(path, false);
-				AppendToDB objOut = new AppendToDB(fileOut);
-				objOut.writeObject(costHistory); 
-				objOut.close();
-				fileOut.close();
-			}*/
+			File path = new File(System.getProperty("user.home") + "/All_Costs.ser");
+			FileOutputStream fileOut = new FileOutputStream(path, false);
+			ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+			objOut.writeObject(costHistory);
+			objOut.close();
+			fileOut.close();
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -107,7 +104,7 @@ public class Inventory extends ConcreteList implements Serializable {
 		double costs = 0;
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Mario/git/ShoppingCart/All_Costs.ser");
+			FileInputStream file_in = new FileInputStream(System.getProperty("user.home") + "/All_Costs.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			costHistory = (double) obj_in.readObject();
 				file_in.close();

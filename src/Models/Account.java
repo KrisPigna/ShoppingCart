@@ -27,13 +27,18 @@ public class Account implements java.io.Serializable {
 	}
 	/**
 	 * Explicit value constructor to set up variables
-	 * @param user
-	 * @param pw
+	 * @param user Username name that was entered by the user
+	 * @param pw Password that was entered by the user
 	 */
 	public Account(String user, String pw){
 		username = user;
 		password = pw;
-		seller = false;
+		if (user.equals("seller")) {
+			seller = true;
+		}
+		else {
+			seller = false;
+		}
 	}
 	/**
 	 * Accessor
@@ -93,6 +98,7 @@ public class Account implements java.io.Serializable {
 			return false;
 		return true;
 	}
+	
 	/**
 	 * User Account object created and stored.
 	 * @return
@@ -101,12 +107,11 @@ public class Account implements java.io.Serializable {
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			File path = new File(System.getProperty("user.home") + "/Login_Credentials.ser");
 			if(path.exists()) {
-				FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+				FileInputStream file_in = new FileInputStream(System.getProperty("user.home") + "/Login_Credentials.ser");
 				ObjectInputStream obj_in = new ObjectInputStream(file_in);
 				Account temp = (Account) obj_in.readObject();
-				
 				try {
 					while (temp != null) {
 						checkDB.add(temp);
@@ -124,14 +129,6 @@ public class Account implements java.io.Serializable {
 					}
 				}
 			}
-			// Insert your own directory to avoid errors. Filename extension must be .ser
-			//File path = new File("/Users/Mario/git/ShoppingCart/Login_Credentials.ser");
-			//********
-			// Uncomment this line to create a seller-type account, then
-			// re-comment it so all accounts created are customer-type
-			// - Kris
-			//********
-			//seller = true;
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -162,7 +159,7 @@ public class Account implements java.io.Serializable {
 	public int loginAccount(){
 		ArrayList<Account> checkDB = new ArrayList<Account>();
 		try { // Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/Login_Credentials.ser");
+			FileInputStream file_in = new FileInputStream(System.getProperty("user.home") + "/Login_Credentials.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			Account temp = (Account) obj_in.readObject();
 			
@@ -180,12 +177,6 @@ public class Account implements java.io.Serializable {
 				Account account = it.next();
 
 				if(this.equals(account)) { // Login credentials verified, returns true and proceed to next view
-					// For testing purposes throughout development, 
-					// these two print statements should always give same number
-					// if the objects are equals.
-					//System.out.println("HashCode: " + this.hashCode());
-					//System.out.println("HashCode: " + account.hashCode());
-					
 					//if account type is customer, returns 1 to proceed to custInventoryView
 					if (account.getType() == false) {
 						return 1;

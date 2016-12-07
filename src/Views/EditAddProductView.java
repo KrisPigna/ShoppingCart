@@ -10,12 +10,10 @@ import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -24,7 +22,18 @@ import Inventory.Inventory;
 import Inventory.Product;
 import Inventory.ProductBundle;
 
+/**
+ * GUI class for sellers to add new products to inventory or edit products
+ * already in inventory
+ * @author kpigna
+ *
+ */
 public class EditAddProductView extends JPanel {
+	/**
+	 * Constructor for the EditAddProductView GUI; initially built with an "add product" set
+	 * of input fields
+	 * @param inv The main inventory to modify or pull data from
+	 */
 	public EditAddProductView(Inventory inv){
 		JPanel addPanel = buildAddPanel(inv);
 		this.setLayout(new BorderLayout());
@@ -32,14 +41,23 @@ public class EditAddProductView extends JPanel {
 		this.setVisible(false);
 	}
 	
-public void addBundle(Inventory inv) {
-	this.removeAll();
-	JPanel addBundle = buildBundlePanel(inv);
-	this.setLayout(new BorderLayout());
-	this.add(addBundle, BorderLayout.CENTER);
-	this.setVisible(false);
-}
+	/**
+	 * Method to populate the view with a set of input fields for adding a bundle-type of product
+	 * @param inv The main inventory to modify or pull data from
+	 */
+	public void addBundle(Inventory inv) {
+		this.removeAll();
+		JPanel addBundle = buildBundlePanel(inv);
+		this.setLayout(new BorderLayout());
+		this.add(addBundle, BorderLayout.CENTER);
+		this.setVisible(false);
+	}
 	
+	/**
+	 * Method to populate the view with a set of input fields for editing an existing product
+	 * @param inv The main inventory to modify or pull data from
+	 * @param prod The existing product being edited
+	 */
 	public void editProduct(Inventory inv, GenericProduct prod) {
 		final JTextField name = new JTextField(prod.getName());
 		final JTextField quantity = new JTextField(Integer.toString(prod.getQty()));
@@ -110,6 +128,11 @@ public void addBundle(Inventory inv) {
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Method for creating a JPanel with input fields for adding a new standard product
+	 * @param inv The main inventory to add to
+	 * @return A JPanel with the necessary input fields
+	 */
 	public JPanel buildAddPanel(Inventory inv) {
 		final JTextField name = new JTextField(10);
 		final JTextField quantity = new JTextField(10);
@@ -169,6 +192,11 @@ public void addBundle(Inventory inv) {
 		return addPanel;
 	}
 	
+	/**
+	 * Method for creating a JPanel with input fields for adding a new bundle of products
+	 * @param inv The main inventory to add to
+	 * @return A JPanel with the necessary input fields
+	 */
 	public JPanel buildBundlePanel(Inventory inv) {
 		final JTextField name = new JTextField(10);
 		final JTextField quantity = new JTextField(10);
@@ -246,12 +274,18 @@ public void addBundle(Inventory inv) {
 		return addBundle;
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener The listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

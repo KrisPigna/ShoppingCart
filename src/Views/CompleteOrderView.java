@@ -33,7 +33,6 @@ public class CompleteOrderView extends JPanel {
 		header.setLayout(new FlowLayout());
 		header.add(title);
 		JButton returnToBrowse = new JButton("Shop Some More!");
-		
 		returnToBrowse.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
@@ -51,22 +50,22 @@ public class CompleteOrderView extends JPanel {
 	
 	/**
 	 * Method to add a change listener to an object
-	 * @param listener
+	 * @param listener The listener to be added
 	 */
-		public void addChangeListener(ChangeListener listener) {
-		    listenerList.add(ChangeListener.class, listener);
-		}
-		
-		/**
-		 * Method to iterate through all existing change listeners and notify them of a state change
-		 * @param evt
-		 */
-		protected void fireStateChanged(ChangeEvent evt) {
-		    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
-		    if (listeners != null && listeners.length > 0) {
-		        for (ChangeListener listener : listeners) {
-		            listener.stateChanged(evt);
-		        }
-		    }
-		}
+	public void addChangeListener(ChangeListener listener) {
+	    listenerList.add(ChangeListener.class, listener);
+	}
+	
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
+	protected void fireStateChanged(ChangeEvent evt) {
+	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
+	    if (listeners != null && listeners.length > 0) {
+	        for (ChangeListener listener : listeners) {
+	            listener.stateChanged(evt);
+	        }
+	    }
+	}
 }

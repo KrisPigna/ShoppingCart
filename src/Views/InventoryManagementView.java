@@ -25,6 +25,10 @@ import Inventory.Inventory;
 import Inventory.Product;
 
 public class InventoryManagementView extends JPanel {
+	/**
+	 * Constructor for the InventoryManagementView GUI
+	 * @param inv The main inventory to modify or pull data from
+	 */
 	public InventoryManagementView(Inventory inv){
 		JLabel subtitle = new JLabel("Inventory Management");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
@@ -84,7 +88,7 @@ public class InventoryManagementView extends JPanel {
 	
 	/**
 	 * Populates a JPanel with all the items in the inventory
-	 * and returns that JPanel for adding into the CustomerInventoryView
+	 * and returns that JPanel for adding into the InventoryManagementView
 	 * @return JPanel with all inventory items added to it
 	 */
 	public JPanel buildInventoryList(Inventory inv){
@@ -120,8 +124,8 @@ public class InventoryManagementView extends JPanel {
 				discount.addActionListener(new
 				ActionListener(){
 					public void actionPerformed(ActionEvent event){
-						Object[] options = {"5", "10", "15", "20"};
-						String s = (String)JOptionPane.showInputDialog(null, "Choose discount: ", null, JOptionPane.PLAIN_MESSAGE, null, options, "5%");
+						Object[] options = {"5", "10", "15", "20", "25", "30", "40", "50", "60", "70", "80", "90", "100"};
+						String s = (String)JOptionPane.showInputDialog(null, "Choose discount percentage: ", null, JOptionPane.PLAIN_MESSAGE, null, options, "5%");
 						DiscountProduct disc = new DiscountProduct(temp, Double.parseDouble(s)/100);
 						inv.replaceProduct(temp, disc);
 						inv.saveToDB();
@@ -205,12 +209,18 @@ public class InventoryManagementView extends JPanel {
 		this.setVisible(false);	
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener The listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

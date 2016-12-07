@@ -12,7 +12,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -20,8 +19,18 @@ import Inventory.Inventory;
 import Models.BarChart;
 import Models.ShoppingCart;
 
+/**
+ * GUI class for sellers to view important sales data
+ * @author kpigna
+ *
+ */
 public class SalesDataView extends JPanel {
 
+	/**
+	 * Constructor for SalesDataVIew GUI
+	 * @param inv The main inventory to pull sales data from
+	 * @param cart Used to pull data of all items sold
+	 */
 	public SalesDataView(Inventory inv, ShoppingCart cart){
 		JLabel subtitle = new JLabel("Sales Data");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
@@ -81,6 +90,13 @@ public class SalesDataView extends JPanel {
 		
 	}
 	
+	/**
+	 * Method to create a JPanel that holds a bar chart representing sales data
+	 * @param c Total costs
+	 * @param r Total revenue
+	 * @param p Total profit
+	 * @return JPanel holding the bar chart
+	 */
 	public JPanel populateBarChart(int c, int r, int p) {
 		BarChart bar1 = new BarChart(c, Color.RED);
 		BarChart bar2 = new BarChart(r, Color.GREEN);
@@ -103,12 +119,18 @@ public class SalesDataView extends JPanel {
 		return chart;
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener The listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

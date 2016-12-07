@@ -29,7 +29,9 @@ public class MainView extends JFrame {
 	private Inventory mainInventory;
 	private ShoppingCart cart;
 	
-	
+	/**
+	 * Constructor for the MainView, which holds panels of all other views
+	 */
 	public MainView(){
 		//create instances of models
 		mainInventory = new Inventory();
@@ -56,7 +58,7 @@ public class MainView extends JFrame {
 					createView.setVisible(true);
 				}
 				if (temp == 1) {
-					custInventoryView.refreshCustomerInventoryView(mainInventory, cart);
+					custInventoryView.updateView(mainInventory, cart);
 					loginView.setVisible(false);
 					custInventoryView.setVisible(true);
 				}
@@ -96,7 +98,7 @@ public class MainView extends JFrame {
 					btn = (JButton) event.getSource();
 					if(btn.getText() == "Checkout") {
 						custInventoryView.setVisible(false);
-						chkOutView.RefreshCheckOutView(mainInventory, cart);
+						chkOutView.updateView(mainInventory, cart);
 						chkOutView.setVisible(true);
 					}
 					if (btn.getText() == "Logout"){
@@ -117,7 +119,7 @@ public class MainView extends JFrame {
 				if (event.getSource().getClass() == btn.getClass()) {
 					btn = (JButton) event.getSource();
 					if (btn.getText() == "Remove"){
-						chkOutView.RefreshCheckOutView(mainInventory, cart);
+						chkOutView.updateView(mainInventory, cart);
 						chkOutView.setVisible(true);
 					}
 					if (btn.getText() == "Back"){
@@ -140,8 +142,8 @@ public class MainView extends JFrame {
 					btn = (JButton) event.getSource();
 					if (btn.getText() == "Shop Some More!"){
 						compOrderView.setVisible(false);
-						custInventoryView.refreshCustomerInventoryView(mainInventory, cart);
-						chkOutView.RefreshCheckOutView(mainInventory, cart);
+						custInventoryView.updateView(mainInventory, cart);
+						chkOutView.updateView(mainInventory, cart);
 						custInventoryView.setVisible(true);
 					}
 				}
@@ -239,6 +241,7 @@ public class MainView extends JFrame {
 		this.setVisible(true);
 	}
 	
+	//Main function for launching view/application
 	public static void main(String[] args){
 		MainView main = new MainView();
 	}

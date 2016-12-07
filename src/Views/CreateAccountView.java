@@ -2,21 +2,16 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Database.AppendToDB;
 import Models.Account;
 
 public class CreateAccountView extends JPanel {
+	/**
+	 * Constructor for CreateAccountView GUI
+	 */
 	public CreateAccountView(){
 		final JTextField userField = new JTextField(10);
 		final JTextField pwField = new JTextField(10);
@@ -52,6 +47,11 @@ public class CreateAccountView extends JPanel {
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Method for updating view based on user interaction
+	 * @param fail If this is true, method makes visible a panel that informs
+	 * the user their account creation attempt was unsuccessful
+	 */
 	public void updateView(boolean fail) {
 		this.removeAll();
 		final JTextField userField = new JTextField(10);
@@ -96,12 +96,18 @@ public class CreateAccountView extends JPanel {
 		this.setVisible(false);
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener The listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

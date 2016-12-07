@@ -10,8 +10,7 @@ public interface ProductList {
 	
 	public GenericProduct findProduct(GenericProduct key) throws CloneNotSupportedException;
 	
-	public void updateQty(GenericProduct key, int newQty); // newQty may or may not be right, just thinking about rebuilding that
-														//dropdown
+	public void updateQty(GenericProduct key, int newQty); 
 	
 	public Iterator<GenericProduct> getIterator();
 	

@@ -2,30 +2,17 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Models.Account;
-import Database.AppendToDB;
-import Inventory.Inventory;
-import Inventory.Product; 
+import Models.Account; 
 
 
 public class LoginView extends JPanel {
+	/**
+	 * Constructor for LoginView GUI.
+	 */
 	public LoginView(){
 		final JTextField userField = new JTextField(10);
 		final JTextField pwField = new JTextField(10);
@@ -45,7 +32,8 @@ public class LoginView extends JPanel {
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
 						Account checkLogin = new Account(userField.getText(), pwField.getText());
-						//if loginAccount() returns true, login was successful and fireStateChanged called
+						//if loginAccount() returns 1, login was successful for customer type; if 2,
+						//successful for seller type; if 0, login failed
 						if (checkLogin.loginAccount() == 1){
 							ChangeEvent evt = new ChangeEvent(1);
 							fireStateChanged(evt);
@@ -60,7 +48,6 @@ public class LoginView extends JPanel {
 						}
 					}
 		});
-		
 		JPanel center = new JPanel();
 		center.setLayout(new BoxLayout(center, 1));
 		JPanel fields = new JPanel();
@@ -84,6 +71,11 @@ public class LoginView extends JPanel {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Method for updating view based on user interaction
+	 * @param fail if this is true, method makes visible a panel that informs
+	 * the user their login attempt was unsuccessful
+	 */
 	public void updateView(boolean fail) {
 		this.removeAll();
 		final JTextField userField = new JTextField(10);
@@ -106,7 +98,8 @@ public class LoginView extends JPanel {
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
 						Account checkLogin = new Account(userField.getText(), pwField.getText());
-						//if loginAccount() returns true, login was successful and fireStateChanged called
+						//if loginAccount() returns 1, login was successful for customer type; if 2,
+						//successful for seller type; if 0, login failed
 						if (checkLogin.loginAccount() == 1){
 							ChangeEvent evt = new ChangeEvent(1);
 							fireStateChanged(evt);
@@ -147,12 +140,18 @@ public class LoginView extends JPanel {
 		this.setVisible(false);
 	}
 	
-	//method to add a change listener to an object
+	/**
+	 * Method to add a change listener to an object
+	 * @param listener The listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
 	}
 	
-	//method to iterate through all existing change listeners and notify them of a state change
+	/**
+	 * Method to iterate through all existing change listeners and notify them of a state change
+	 * @param evt The ChangeEvent that listeners are being notified of
+	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
 	    if (listeners != null && listeners.length > 0) {

@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 import Inventory.GenericProduct;
 import Inventory.Inventory;
 import Models.ShoppingCart;
+
 /**
  * Class to handle UI for when customer first logs in and browses available inventory.
  * @author Paul
@@ -31,8 +32,8 @@ public class CustomerInventoryView extends JPanel {
 	 * Constructor for the view
 	 * <p>Includes a JButton "checkout" with included functionality to fire a state change
 	 * and transition views to CheckOutView.
-	 * @param inv
-	 * @param cart
+	 * @param inv The main inventory to modify or pull from
+	 * @param cart The user's cart to add products to
 	 */
 	public CustomerInventoryView(Inventory inv, ShoppingCart cart){
 		JLabel totalLabel = new JLabel("Cart total: $");
@@ -59,7 +60,6 @@ public class CustomerInventoryView extends JPanel {
 		JScrollPane productScroll = new JScrollPane(products);
 		productScroll.setPreferredSize(new Dimension(350, 400));
 		JButton checkout = new JButton("Checkout");
-		
 		checkout.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
@@ -69,7 +69,6 @@ public class CustomerInventoryView extends JPanel {
 						}
 					}
 		});
-		
 		this.setLayout(new BorderLayout());
 		this.add(header, BorderLayout.NORTH);
 		this.add(productScroll, BorderLayout.CENTER);
@@ -82,7 +81,7 @@ public class CustomerInventoryView extends JPanel {
 	 * @param inv
 	 * @param cart
 	 */
-	public void refreshCustomerInventoryView(Inventory inv, ShoppingCart cart) {
+	public void updateView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
 		JLabel totalLabel = new JLabel("Cart total: $");
 		cartTotal = new JLabel("0");
@@ -102,16 +101,13 @@ public class CustomerInventoryView extends JPanel {
 				fireStateChanged(evt);
 			}
 		});
-		
 		header.add(title);
 		header.add(total);
 		header.add(logout);
 		JPanel products = buildInventoryList(inv, cart);
 		JScrollPane productScroll = new JScrollPane(products);
 		productScroll.setPreferredSize(new Dimension(350, 400));
-		
 		JButton checkout = new JButton("Checkout");
-		
 		checkout.addActionListener(new
 				ActionListener() {
 					public void actionPerformed(ActionEvent event) {
@@ -210,7 +206,7 @@ public class CustomerInventoryView extends JPanel {
 	
 	/**
 	 * Method to add a change listener to an object
-	 * @param listener
+	 * @param listener The listener to be added
 	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
@@ -218,7 +214,7 @@ public class CustomerInventoryView extends JPanel {
 	
 	/**
 	 * Method to iterate through all existing change listeners and notify them of a state change
-	 * @param evt
+	 * @param evt The ChangeEvent that listeners are being notified of
 	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);

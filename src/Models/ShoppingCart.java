@@ -1,6 +1,5 @@
 package Models;
 
-import java.awt.event.ActionEvent;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.JButton;
-import javax.swing.event.ChangeEvent;
-
 import Database.AppendToDB;
 import Inventory.ConcreteList;
 import Inventory.GenericProduct;
@@ -27,7 +21,11 @@ import Inventory.Product;
  * @author Paul
  */
 public class ShoppingCart extends ConcreteList implements Serializable {
+	/**
+	 * Constructor for shopping cart (deliberately empty)
+	 */
 	public ShoppingCart(){}
+	
 	/**
 	 * Dump the cart and save its state. 
 	 */
@@ -35,6 +33,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 		saveToDB();
 		prodList = new ArrayList<GenericProduct>();
 	}
+	
 	/**
 	 * Scope of project does not include a full on "complete order and pay" process, however
 	 * placeholder method is here for future implementation.
@@ -44,12 +43,12 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 		
 	}
 	/**
-	 * Save state of the cart for statistics purposes
+	 * Save state of the cart for SalesDataView purposes
 	 */
 	public void saveToDB(){
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			File path = new File("/Users/Paul/git/ShoppingCart/All_Sales.ser");
+			File path = new File(System.getProperty("user.home") + "/All_Sales.ser");
 			if(!path.exists()) {
 				FileOutputStream fileOut = new FileOutputStream(path, true);
 				ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -78,7 +77,7 @@ public class ShoppingCart extends ConcreteList implements Serializable {
 		double revenue = 0;
 		try { 
 			// Insert your own directory to avoid errors. Filename extension must be .ser
-			FileInputStream file_in = new FileInputStream("/Users/Paul/git/ShoppingCart/All_Sales.ser");
+			FileInputStream file_in = new FileInputStream(System.getProperty("user.home") + "/All_Sales.ser");
 			ObjectInputStream obj_in = new ObjectInputStream(file_in);
 			ArrayList<Product> allSales = (ArrayList<Product>) obj_in.readObject();
 			try {

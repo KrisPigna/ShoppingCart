@@ -29,8 +29,8 @@ import Models.ShoppingCart;
 public class CheckOutView extends JPanel {
 	/**
 	 * Constructor for the view
-	 * @param inv
-	 * @param cart
+	 * @param inv The main inventory to modify or pull data from
+	 * @param cart User's shopping cart
 	 */
 	public CheckOutView(Inventory inv, ShoppingCart cart) {
 		JLabel total = new JLabel("Cart total: $");
@@ -61,7 +61,7 @@ public class CheckOutView extends JPanel {
 	 * @param inv
 	 * @param cart
 	 */
-	public void RefreshCheckOutView(Inventory inv, ShoppingCart cart) {
+	public void updateView(Inventory inv, ShoppingCart cart) {
 		this.removeAll();
 		JLabel total = new JLabel("Cart total: $");
 		JLabel title = new JLabel("Shop-A-Tron 5000");
@@ -153,7 +153,7 @@ public class CheckOutView extends JPanel {
 
 	/**
 	 * Method to add a change listener to an object
-	 * @param listener
+	 * @param listener The listener to be added
 	 */
 	public void addChangeListener(ChangeListener listener) {
 	    listenerList.add(ChangeListener.class, listener);
@@ -161,7 +161,7 @@ public class CheckOutView extends JPanel {
 	
 	/**
 	 * Method to iterate through all existing change listeners and notify them of a state change
-	 * @param evt
+	 * @param evt The ChangeEvent that listeners are being notified of
 	 */
 	protected void fireStateChanged(ChangeEvent evt) {
 	    ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
